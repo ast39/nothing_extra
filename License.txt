@@ -1,0 +1,31 @@
+===EN===
+This license is a legal agreement between you and the NothingExtra (NE) development team represented by the Statut Alexander Sergeevich
+("Software") for using NothingExtra (NE).
+
+Distribution and use in source and binary form, with or without modifications, is permitted subject to the following conditions:
+ - When redistributing the source code, the above copyright notice, this list of conditions and the subsequent disclaimer of warranties must remain.
+ - When redistributing the binary code, the above copyright notice, this list of conditions and the following disclaimer in the documentation and / or other materials supplied with the distribution must be reproduced.
+ - All advertising materials mentioning the possibilities or use of this program should contain the following notice: "This product includes software developed by the Aleksandr Sergeevich Statut."
+ - Neither the name NothingExtra (NE), nor the names of its developers can be used as a support or promotion of products based on this software without prior written permission.
+
+UNDER ANY CIRCUMSTANCES THE COPYRIGHT OWNERS AND PARTICIPANTS ARE NOT RESPONSIBLE FOR LOSS OF DATA OR PROFIT.
+
+By using the software, you agree to abide by the terms of this license.
+Copyright (C) 2022 NothingExtra (NE)
+All rights reserved.
+
+===RU===
+Эта лицензия является юридическим соглашением между Вами и группой разработки NothingExtra (NE) в лице Статута Александра Сергеевича
+("Программное обеспечение") для использования NothingExtra (NE).
+
+Распространение и использование в исходной и двоичной форме, с модификациями или без, разрешено при соблюдении следующих условий:
+ - При повторном распространении исходного кода должно оставаться указанное выше уведомление об авторском праве, этот список условий и последующий отказ от гарантий.
+ - При повторном распространении двоичного кода должно воспроизводиться указанное выше уведомление об авторском праве, этот список условий и нижеследующий отказ от гарантий в документации и/или в других материалах, поставляемых при распространении.
+ - Все рекламные материалы, упоминающие возможности либо использование этой программы, должны содержать следующее уведомление: "Этот продукт включает программное обеспечение, разработанное Статутом Александром Сергеевичем".
+ - Ни название NothingExtra (NE), ни имена его разработчиков не могут быть использованы в качестве поддержки или продвижения продуктов, основанных на этом ПО без предварительного письменного разрешения.
+
+НИ ПРИ КАКИХ ОБСТОЯТЕЛЬСТВАХ ВЛАДЕЛЕЦ АВТОРСКИХ ПРАВ И УЧАСТНИКИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ЗА ПОТЕРЮ ДАННЫХ ИЛИ ПРИБЫЛИ.
+
+При использовании программного обеспечения, вы соглашаетесь соблюдать условия этой лицензии.
+Copyright (C) 2022 NothingExtra (NE)
+Все права защищены.

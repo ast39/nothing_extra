@@ -1,0 +1,35 @@
+# Страницы ошибок
+ErrorDocument 403 /404.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /404.php
+
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    RewriteBase /
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
+    # RewriteRule ^(.*)$ /site_in_dir/index.php?q=$1 [L,QSA]
+
+    RewriteRule ^(?:cfg|core|helper|project)\b.* index.php/$0 [L]
+
+    #RewriteCond %{HTTP_HOST} ^scoding.ru$ [NC]
+    #RewriteRule ^(.*)$ http://www.scoding.ru/$1 [R=301,L]
+
+    #RewriteCond %{HTTPS} on
+    #RewriteRule (.*) http://%{HTTP_HOST}%{REQUEST_URI}
+
+</IfModule>
+
+<Files .*>
+	Order Deny,Allow
+	Deny From All
+</Files>

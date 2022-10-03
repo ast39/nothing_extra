@@ -1,0 +1,9 @@
+User-agent:*
+Disallow: /admin_panel/
+Disallow: /cfg/
+Disallow: /manual/
+Disallow: /system/
+Disallow: /tmp/
+
+Allow: /project/
+Allow: /i/
