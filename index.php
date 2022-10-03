@@ -6,7 +6,7 @@
  * Time: 11:00
  */
 
-use framework\classes\{Buffer, NE, Route};
+use framework\classes\{Buffer, NE};
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 /*
@@ -117,7 +117,7 @@ if (file_exists(ROOT . 'vendor/swiftmailer/swiftmailer/lib/classes/Swift/SmtpTra
 +----------------------------------------------------------------------------------------------------
 */
 $cfg_storage['routes'] = (include ROOT . 'config'. DIRECTORY_SEPARATOR . 'routing' . EXT)['routes'];
-\framework\classes\Buffer::getInstance()->framework_cfg = $cfg_storage;
+Buffer::getInstance()->framework_cfg = $cfg_storage;
 
 /*
 +----------------------------------------------------------------------------------------------------

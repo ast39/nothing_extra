@@ -49,7 +49,7 @@ use framework\classes\Url;
                 </div>
                 <div class="card-body">
                     Убедитесь, что Ваша система сконфигурирована правильно и удовлетворяет всем требованиям <code>NothingExtra Framework</code>.
-                    После чего можете удалить файл <code>install.php</code> из корня проекта или переименовать его.
+                    После чего можете удалить файл <code>install.php</code> из папки public проекта или переименовать его.
                 </div>
                 <table class="table">
                     <tbody>

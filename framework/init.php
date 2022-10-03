@@ -143,9 +143,9 @@ const MSG_ERROR   = 3;
 +----------------------------------------------------------------------------------------------------
 */
 if (file_exists(publicPath() . 'install.php') && !Route::adminFolder()) {
-//    require_once publicPath() . 'install.php';
+    require_once publicPath() . 'install.php';
 
-//    die;
+    die;
 }
 
 /*
