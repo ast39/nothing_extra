@@ -30,7 +30,7 @@ use framework\classes\Url;
             <div class="card bg-light mb-3">
                 <img class="card-img-top" src="<?= Url::img('system/install.png') ?>" alt="Card image cap">
                 <div class="card-header text-center border-top">
-                    <h5>Simple Coding</h5>
+                    <h5>Nothing Extra | Ничего лишнего</h5>
                 </div>
                 <table class="table">
                     <tbody>
