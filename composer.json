@@ -24,7 +24,8 @@
     "illuminate/database": "^7.30",
     "swiftmailer/swiftmailer": "^6.3",
     "symfony/cache": "^5.3",
-    "guzzlehttp/guzzle": "^7.3"
+    "guzzlehttp/guzzle": "^7.3",
+    "vlucas/phpdotenv": "^5.4"
   },
 
   "autoload": {
