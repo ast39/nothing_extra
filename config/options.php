@@ -27,7 +27,7 @@ return [
         'multi_lang' => false,
     
         # вкл / выкл вывод ошибок
-        'production' => true,
+        'production' => false,
     
         # вкл / выкл дебаг информации
         'debug' => true,

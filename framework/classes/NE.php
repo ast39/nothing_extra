@@ -54,29 +54,29 @@ class NE {
 
     public static function logSystemError($e, $type = 'custom')
     {
+        if (is_object($e)) {
+
+            $log = json_encode([
+                'type'  => $type,
+                'time'  => date('H:i:s', time()),
+                'ip'    => static::getIp(),
+                'msg'   => $e->getMessage(),
+                'code'  => $e->getCode(),
+                'file'  => $e->getFile(),
+                'line'  => $e->getLine(),
+                'trace' => $e->getTrace(),
+            ]);
+        } else {
+
+            $log = json_encode([
+                'type' => $type,
+                'time' => date('H:i:s', time()),
+                'ip'   => static::getIp(),
+                'msg'  => $e,
+            ]);
+        }
+
         if (config('options.log_errors') === true) {
-
-            if (is_object($e)) {
-
-                $log = json_encode([
-                    'type'  => $type,
-                    'time'  => date('H:i:s', time()),
-                    'ip'    => static::getIp(),
-                    'msg'   => $e->getMessage(),
-                    'code'  => $e->getCode(),
-                    'file'  => $e->getFile(),
-                    'line'  => $e->getLine(),
-                    'trace' => $e->getTrace(),
-                ]);
-            } else {
-
-                $log = json_encode([
-                    'type' => $type,
-                    'time' => date('H:i:s', time()),
-                    'ip'   => static::getIp(),
-                    'msg'  => $e,
-                ]);
-            }
 
             $file = date('Y-m-d', time());
             if (Storage::disk('logs')->exists($file)) {
@@ -84,6 +84,10 @@ class NE {
             } else {
                 Storage::disk('logs')->put($file, $log);
             }
+        }
+
+        if (!PROD) {
+            Error::view(objectToArray(json_decode($log, true)));
         }
     }
 

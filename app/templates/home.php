@@ -1,6 +1,6 @@
 <?php
 
-include_once ROOT . 'autoloader.php';
+include_once frameworkPath() . 'autoloader.php';
 
 use framework\classes\Url;
 

@@ -167,16 +167,12 @@ define("LOCAL", strpos(NE::getIp(), "127.0.0.") !== false
 | Initialization
 +----------------------------------------------------------------------------------------------------
 */
-if (PROD) {
-    try {
-        require_once frameworkPath() . 'init' . EXT;
-    } catch (Error $e) {
-        NE::logSystemError($e, 'error');
-    } catch (Exception $e) {
-        NE::logSystemError($e, 'exception');
-    } catch (Throwable $e) {
-        NE::logSystemError($e, 'throw');
-    }
-} else {
+try {
     require_once frameworkPath() . 'init' . EXT;
+} catch (Error $e) {
+    NE::logSystemError($e, 'error');
+} catch (Exception $e) {
+    NE::logSystemError($e, 'exception');
+} catch (Throwable $e) {
+    NE::logSystemError($e, 'throw');
 }
