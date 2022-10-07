@@ -8,7 +8,7 @@
 
 namespace admin\controllers;
 
-use framework\classes\Controller;
+use framework\classes\{Controller, Buffer};
 
 
 class License extends Controller {
@@ -16,11 +16,6 @@ class License extends Controller {
     public function __construct()
     {
         parent::__construct();
-
-        if (!$this->isAdminAuth() && !$this->isRootAuth()) {
-            $this->url::redirect(SITE . 'login');
-        }
-
     }
 
     public function index()
@@ -44,9 +39,9 @@ class License extends Controller {
             array_push($$lic_name, $line);
         }
 
-        $this->buffer->license = config('options.def_lang') == 'ru'
+        Buffer::getInstance()->set('license', config('options.def_lang') == 'ru'
             ? implode('<br />', $lic_ru)
-            : implode('<br />', $lic_en);
+            : implode('<br />', $lic_en));
 
         $this->loadTemplate();
     }

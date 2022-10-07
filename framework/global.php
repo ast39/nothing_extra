@@ -7,80 +7,65 @@
  */
 
 
-use framework\classes\{NE, Buffer};
+use framework\classes\{NE, Buffer, SystemMessage};
 
 
-function xmp($data)
+function xmp($data): void
 {
     echo '<pre>' . print_r($data, true) . '</pre>';
 }
 
-function printSession()
+function printSession(): void
 {
     xmp($_SESSION);
 }
 
-function printPost()
+function printPost(): void
 {
     xmp($_POST);
 }
 
-function printClassMethods($class)
+function printClassMethods($class): void
 {
     xmp(get_class_methods($class));
 }
 
-function printMethodParams()
+function printMethodParams(): void
 {
     xmp(func_get_args());
 }
 
-function requestType()
+function requestType(): string
 {
     return $_SERVER['REQUEST_METHOD'] ?? 'GET';
 }
 
-function isAjax()
+function isAjax(): bool
 {
     return
         isset ($_SERVER['HTTP_X_REQUESTED_WITH'])
-        && !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
-        && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+            && !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 }
 
-function isJson($string)
+function isJson($string): bool
 {
     return is_string($string) &&
         (is_object(json_decode($string)) ||
             is_array(json_decode($string)));
 }
 
-function objectToArray($data)
+function objectToArray($data): array
 {
     return json_decode(json_encode($data), true);
 }
 
-function xmlToArray($xml_string)
+function xmlToArray($xml_string): array
 {
     $xml   = simplexml_load_string($xml_string, "SimpleXMLElement", LIBXML_NOCDATA);
     $json  = json_encode($xml);
 
     return json_decode($json,TRUE);
-}
-
-function noController($page_class)
-{
-    if  ($page_class != 'i' && stripos($page_class, 'apple-touch-icon') === false) {
-        NE::logSystemError('Controller not found: ' . $page_class);
-    }
-
-    NE::goTo404();
-}
-
-function noMethod($page_method)
-{
-    NE::logSystemError('Method not found: ' . $page_method);
-    NE::goTo404();
 }
 
 function config($key = null, $default = null)
@@ -93,19 +78,36 @@ function config($key = null, $default = null)
     $global  = count($keys) <= 1;
     $cfg_key = array_shift($keys);
 
-    $cfg_storage = \framework\classes\Buffer::getInstance()->framework_cfg;
+    $cfg_storage = Buffer::getInstance()->framework_cfg;
 
     return $global
         ? $cfg_storage[$cfg_key] ?? $default
         : $cfg_storage[$cfg_key][implode('.', $keys)] ?? $default;
 }
 
-function publicPath()
+function publicPath(): string
 {
     return ROOT . 'public' . DIRECTORY_SEPARATOR;
 }
 
-function frameworkPath()
+function frameworkPath(): string
 {
     return ROOT . 'framework' . DIRECTORY_SEPARATOR;
+}
+
+function redirect(string $url, int $code = 302): void
+{
+    SystemMessage::saveMessages();
+
+    header("Location: " . $url, true,
+        in_array($code, [300,301,302,303,304,305,306,307,308])
+            ? $code : 302);
+    exit();
+}
+
+function goTo404()
+{
+    header($_SERVER['SERVER_PROTOCOL'] . " 404 Not Found");
+    include_once publicPath() . '404' . EXT;
+    exit;
 }

@@ -14,17 +14,11 @@ return [
         # кодировка сайта
         'charset' => 'utf-8',
     
-        # протокол сайта
-        'protocol' => 'https',
-    
         # сайт в каталоге
         'site_dir' => '',
     
         # экстренно остановить сайт
         'site_stop' => false,
-    
-        # мультиязычный сайт
-        'multi_lang' => false,
     
         # вкл / выкл вывод ошибок
         'production' => false,
@@ -42,10 +36,7 @@ return [
         'login_page' => 'login',
     
         # url для доступа в админку
-        'admin_partition' => 'site_admin/',
-    
-        # язык сайта по умолчанию
-        'def_lang' => 'ru',
+        'admin_partition' => 'site_admin',
     
         # страница ( класс ) по умолчанию
         'def_page' => 'home',
@@ -54,7 +45,7 @@ return [
         'def_method' => 'index',
     
         # имя массива сессии с данными
-        'session_array' => 'sc',
+        'session_array' => 'ne',
     
         # время жизни сессионной куки
         'session_set_cookie_params' => 7200,
@@ -71,7 +62,7 @@ return [
         'admin_password' => '',
     
         # права доступа к создаваемым каталогам
-        'dir_access' => '0755',
+        'dir_access' => 0777,
         
         # метка авторизации на сайте
         'user_auth_mark' => '_auth_user_',
@@ -90,12 +81,14 @@ return [
         
         # время кэширования
         'cache_time' => 3600,
-    
+
+        # язык сайта по умолчанию
+        'def_lang' => 'ru',
+
         # массив языковых версий сайта
         'site_langs' => [
 
             'ru',
-            'en'
         ],
 
     ],

@@ -9,7 +9,7 @@
 
 namespace admin\controllers;
 
-use framework\classes\{Controller, NE, Request};
+use framework\classes\{Controller, Buffer, NE, Request};
 
 
 class Login extends Controller {
@@ -19,18 +19,18 @@ class Login extends Controller {
         parent::__construct();
 
         if ($this->isRootAuth() || $this->isAdminAuth()) {
-            $this->url::redirect(SITE);
+            redirect(SITE);
         }
     }
 
     public function index()
     {
         if (!LOCAL && (in_array(config('options.admin_login'), ['admin', 'root']) || !NE::strongPassword(config('options.admin_password')))) {
-            $this->buffer->attention = $this->langLine('login_default_data');
+            Buffer::getInstance()->set('attention', $this->langLine('login_default_data'));
         }
 
         if (!LOCAL && (in_array(config('options.root_login'), ['admin', 'root']) || !NE::strongPassword(config('options.root_password')))) {
-            $this->buffer->attention = $this->langLine('login_default_data');
+            Buffer::getInstance()->set('attention', $this->langLine('login_default_data'));
         }
 
         if (Request::issetAnyWhere('try_auth') != false) {
@@ -43,15 +43,14 @@ class Login extends Controller {
             if (config('options.admin_login') == $admin_login && config('options.admin_password') == $admin_pass) {
 
                 $this->authAdmin();
-                $this->url::redirect(SITE);
+                redirect(SITE . config('options.def_page'));
             } elseif (config('options.root_login') == $admin_login && config('options.root_password') == $admin_pass) {
-                
+
                 $this->authRoot();
-                $this->url::redirect(SITE);
+                redirect(SITE . config('options.def_page'));
             } else {
 
-                $this->buffer->error = $this->langLine('login_wrong_data');
-                NE::logSystemError('Failed admin auth [' . $admin_login . ']:[' . $admin_pass . ']');
+                Buffer::getInstance()->set('error', $this->langLine('login_wrong_data'));
             }
         }
 

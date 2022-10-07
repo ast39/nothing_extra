@@ -18,12 +18,17 @@ class Buffer {
 
     private $buffer = [];
     
-    public function __set($name, $value)
+    public function set($name, $value)
     {
         $this->buffer[$name] = $value;
     }
 
-    public function __get($name) 
+    public function get($name)
+    {
+        return $this->buffer[$name] ?? null;
+    }
+
+    public function __get($name)
     {
         return $this->buffer[$name] ?? null;
     }

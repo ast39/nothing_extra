@@ -13,13 +13,6 @@ use framework\modules\storage\Storage;
 
 class NE {
 
-    public static function goTo404()
-    {
-        header("HTTP/1.1 404 Not Found");
-        include_once publicPath() . '404' . EXT;
-        exit;
-    }
-
     public static function langLine($name, $file = false, $global = false)
     {
         # Для начала получим резервный вариант для дефолтного языка
@@ -80,7 +73,7 @@ class NE {
 
             $file = date('Y-m-d', time());
             if (Storage::disk('logs')->exists($file)) {
-                Storage::disk('logs')->append($file, PHP_EOL . $log);
+                Storage::disk('logs')->append($file, $log);
             } else {
                 Storage::disk('logs')->put($file, $log);
             }
@@ -88,6 +81,7 @@ class NE {
 
         if (!PROD) {
             Error::view(objectToArray(json_decode($log, true)));
+            die;
         }
     }
 
@@ -106,12 +100,12 @@ class NE {
                 'os'         => $indexing->detectOS(),
                 'ip'         => static::getIp(),
                 'user'       => $_SERVER['HTTP_USER_AGENT'] ?: '-',
-                'url'        => Route::fullUrl(),
+                'url'        => Url::siteRoot(),
             ]);
 
             $file = date('Y-m-d', time());
             if (Storage::disk('visits')->exists($file)) {
-                Storage::disk('visits')->append($file, PHP_EOL . $log);
+                Storage::disk('visits')->append($file, $log);
             } else {
                 Storage::disk('visits')->put($file, $log);
             }

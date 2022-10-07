@@ -2,8 +2,6 @@
 
 namespace framework\classes;
 
-use framework\classes\{Session, NE};
-
 
 class Cloud {
 
@@ -95,11 +93,11 @@ class Cloud {
 
         if (Session::get('good_log') != false) {
 
-            Buffer::getInstance()->good_log = Session::get('good_log');
+            Buffer::getInstance()->set('good_log', Session::get('good_log'));
             Session::remove('good_log');
         } elseif (Session::get('bad_log') != false) {
 
-            Buffer::getInstance()->bad_log = Session::get('bad_log');
+            Buffer::getInstance()->set('bad_log', Session::get('bad_log'));
             Session::remove('bad_log');
         }
 

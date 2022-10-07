@@ -1,4 +1,4 @@
-<?php use framework\classes\Url; ?>
+<?php use framework\classes\{Url, Buffer}; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +17,8 @@
 
     <script src="<?= Url::js('script') ?>"></script>
 
-    <title><?= $this->buffer->extra_title ?? $this->pageTitle() ?></title>
-    <meta name="description" content="<?= $this->buffer->extra_description ?? $this->pageDescription() ?>">
+    <title><?= Buffer::getInstance()->extra_title ?? $this->pageTitle() ?></title>
+    <meta name="description" content="<?= Buffer::getInstance()->extra_description ?? $this->pageDescription() ?>">
 </head>
 <body>
     <div class="container">

@@ -1,5 +1,7 @@
 <?php
 
+use framework\classes\Routing;
+
 /*
 +----------------------------------------------------------------------------------------------------
 | Access control
@@ -12,7 +14,7 @@ if ( ! defined('VERSION')) exit('Not access');
 | Used libraries
 +----------------------------------------------------------------------------------------------------
 */
-use framework\classes\{NE, Route, Benchmark, Session};
+use framework\classes\{NE, Url, Benchmark, Session};
 
 /*
 +----------------------------------------------------------------------------------------------------
@@ -56,7 +58,7 @@ if (Session::get('lastActivity', true)) {
     if ($delay >= config('options.session_set_cookie_params')) {
 
         session_destroy();
-        Route::redirect(Route::siteRoot(), 301);
+        redirect(Url::siteRoot(), 301);
     }
 }
 
@@ -95,36 +97,26 @@ header('Content-type: text/html; charset=' . config('options.charset'));
 | Check for admin path
 +----------------------------------------------------------------------------------------------------
 */
-if (Route::adminFolder()) {
+if (Routing::getInstance()->isAdminSegment()) {
     define('ADMIN', true);
 }
-
-/*
-+----------------------------------------------------------------------------------------------------
-| General route parts
-+----------------------------------------------------------------------------------------------------
-*/
-$prefix          = '';
-$page_class      = Route::pageController();
-$page_method     = Route::pageMethod();
-$page_parameters = Route::pageParameters();
-define('LANG', strtolower(Route::pageLang()));
 
 /*
 +----------------------------------------------------------------------------------------------------
 | General route constants
 +----------------------------------------------------------------------------------------------------
 */
-define('PROJECT_URL', Route::siteRoot());
+define('LANG', Routing::getInstance()->getLang());
+define('PROJECT_URL', Url::siteRoot());
 define('SITE',
     defined('ADMIN')
-        ? Route::siteRoot() . config('options.admin_partition')
-        : Route::siteRoot());
-define('SITE_FOR_STATIC', Route::siteRootForStatic());
+        ? Url::siteRoot() . config('options.admin_partition') . '/'
+        : Url::siteRoot());
+define('SITE_FOR_STATIC', Url::siteRootForStatic());
 
-define('SITE_IMG', str_replace(config('options.admin_partition'), '', SITE_FOR_STATIC) . 'public/img/');
-define('SITE_CSS', str_replace(config('options.admin_partition'), '', SITE_FOR_STATIC) . 'public/css/');
-define('SITE_JS',  str_replace(config('options.admin_partition'), '', SITE_FOR_STATIC) . 'public/js/');
+define('SITE_IMG', Url::img());
+define('SITE_CSS', Url::css());
+define('SITE_JS',  Url::js());
 define('AUTH_PROJECT', NE::isUserAuth());
 
 /*
@@ -142,10 +134,10 @@ const MSG_ERROR   = 3;
 | First run page
 +----------------------------------------------------------------------------------------------------
 */
-if (file_exists(publicPath() . 'install.php') && !Route::adminFolder()) {
-    require_once publicPath() . 'install.php';
-
-    die;
+if (file_exists(publicPath() . 'install.php') && !Url::isAdminPanel()) {
+//    require_once publicPath() . 'install.php';
+//
+//    die;
 }
 
 /*
@@ -153,7 +145,7 @@ if (file_exists(publicPath() . 'install.php') && !Route::adminFolder()) {
 | Site stop checking
 +----------------------------------------------------------------------------------------------------
 */
-if (config('options.site_stop') && !defined('ADMIN')) {
+if (config('options.site_stop') && !Url::isAdminPanel()) {
     include_once (publicPath() . 'site_stop' . EXT);
 
     die;
@@ -164,7 +156,7 @@ if (config('options.site_stop') && !defined('ADMIN')) {
 | Visit log
 +----------------------------------------------------------------------------------------------------
 */
-if (!defined('ADMIN') && $page_class != 'i') {
+if (!Url::isAdminPanel()) {
     NE::logVisit();
 }
 
@@ -173,72 +165,34 @@ if (!defined('ADMIN') && $page_class != 'i') {
 | Route rules
 +----------------------------------------------------------------------------------------------------
 */
-$route_cfg = config('routes');
-
-if (($route = Route::findRouteRule($route_cfg)) !== NULL && !defined('ADMIN')) {
-
-    $page_class      = $route['class'];
-    $page_method     = $route['method'];
-    $page_parameters = $route['parameters'];
-}
-
-
-/*
-+----------------------------------------------------------------------------------------------------
-| Find target class controller
-+----------------------------------------------------------------------------------------------------
-*/
-$namespace_class = defined('ADMIN')
-    ? "\\admin\\controllers\\" . ucfirst($page_class)
-    : "\\app\\controllers\\" . ucfirst($page_class);
-
-Benchmark::getInstance()->addMark('_class_checker_');
-
-/*
-+----------------------------------------------------------------------------------------------------
-| If controller not found, then 404
-+----------------------------------------------------------------------------------------------------
-*/
-if (!class_exists($namespace_class)) {
-    noController($page_class);
-}
-
-define('PAGE', strtolower($page_class));
-
-/*
-+----------------------------------------------------------------------------------------------------
-| If controller isset, call it
-+----------------------------------------------------------------------------------------------------
-*/
-$page = new $namespace_class();
-
-/*
-+----------------------------------------------------------------------------------------------------
-| If method not found, then 404
-+----------------------------------------------------------------------------------------------------
-*/
-if (!method_exists($page, $page_method)) {
-    noMethod($page_method);
-}
-
-define('PAGE_METHOD', strtolower($page_method));
-define('PAGE_QUERY', $page_parameters);
-define('SITE_QUERY', Route::fullUrl());
-
 Benchmark::getInstance()->addMark('_init_route_page_class_');
 
-/*
-+----------------------------------------------------------------------------------------------------
-| If method isset, call it
-+----------------------------------------------------------------------------------------------------
-*/
-ob_start();
-if ($page_parameters == null) {
-    $page->$page_method();
+if (!Routing::getInstance()->findMatches()) {
+
+    $uri_parts = explode('/', Routing::getInstance()->getCurrentUri());
+    $uri_parts = array_filter($uri_parts, function($e) {
+        return !empty($e);
+    });
+
+    if (count($uri_parts) > 0) {
+        goTo404();
+    } else {
+        define('PAGE', config('options.def_page'));
+        define('PAGE_METHOD', config('options.def_method'));
+        define('PAGE_QUERY', []);
+    }
 } else {
-    call_user_func_array([$page, $page_method], $page_parameters);
+
+    define('PAGE', Routing::getInstance()->controller);
+    define('PAGE_METHOD', Routing::getInstance()->method);
+    define('PAGE_QUERY', Routing::getInstance()->parameters);
 }
 
+ob_start();
+Routing::getInstance()->setNamespace(defined('ADMIN')
+    ? '\\admin\\controllers'
+    : '\\app\\controllers');
+Routing::getInstance()->run(PAGE, PAGE_METHOD, PAGE_QUERY);
 echo ob_get_clean();
 
 /*

@@ -1,4 +1,4 @@
-<?php use framework\classes\Url; ?>
+<?php use framework\classes\{Url, Buffer}; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@
     <script src="<?= Url::js('jquery.gritter') ?>" type="text/javascript" charset="utf-8"></script>
     <link type="text/css" href="<?= Url::css('jquery.gritter') ?>" rel="stylesheet" />
 
-    <title><?= $this->buffer->extra_title ?? $this->pageTitle() ?></title>
+    <title><?= Buffer::getInstance()->extra_title ?? $this->pageTitle() ?></title>
 </head>
 <body>
 
@@ -34,15 +34,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent2">
             <ul class="navbar-nav mr-auto">
-                <?php if ($this->isRootAuth()): ?>
+                <?php if ($this->isRootAuth() || $this->isAdminAuth()): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= PAGE == 'license' ? 'active' : '' ?>" href="<?= SITE ?>license"><?= $this->langLine('menu_lic') ?></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?= in_array(PAGE, ['errorlog', 'visitlog']) ? 'active' : '' ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->langLine('menu_logs') ?></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<?= SITE ?>errorlog"><?= $this->langLine('menu_logs_errors') ?></a>
-                            <a class="dropdown-item" href="<?= SITE ?>visitlog"><?= $this->langLine('menu_logs_visits') ?></a>
+                            <a class="dropdown-item" href="<?= SITE ?>log/error"><?= $this->langLine('menu_logs_errors') ?></a>
+                            <a class="dropdown-item" href="<?= SITE ?>log/visit"><?= $this->langLine('menu_logs_visits') ?></a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -53,15 +53,15 @@
                             <?php if ($this->isRootAuth()): ?>
                                 <a class="dropdown-item" href="<?= SITE ?>management/htaccess"><?= $this->langLine('menu_manage_htaccess') ?></a>
                             <?php endif; ?>
-                            <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?= SITE ?>management/status"><?= $this->langLine('menu_manage_status') ?></a>
                         </div>
                     </li>
-                    <li class="nav-item <?= PAGE == 'redactor' ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?= SITE ?>redactor"><?= $this->langLine('menu_redactor') ?></a>
-                    </li>
+                    <?php if ($this->isRootAuth()): ?>
+                        <li class="nav-item <?= PAGE == 'redactor' ? 'active' : '' ?>">
+                            <a class="nav-link" href="<?= SITE ?>explorer/scan/:"><?= $this->langLine('menu_redactor') ?></a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item <?= PAGE == 'images' ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?= SITE ?>images"><?= $this->langLine('menu_image') ?></a>
+                        <a class="nav-link" href="<?= SITE ?>upload/image"><?= $this->langLine('menu_image') ?></a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
@@ -70,9 +70,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= str_ireplace(config('options.admin_partition'), '', SITE) . 'manual' ?>"><?= $this->langLine('menu_manual') ?></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= SITE ?>logout"><?= $this->langLine('menu_logout') ?></a>
-                </li>
+                <?php if ($this->isRootAuth() || $this->isAdminAuth()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= SITE ?>logout"><?= $this->langLine('menu_logout') ?></a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

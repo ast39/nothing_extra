@@ -29,7 +29,7 @@ class SystemMessage {
                 : $current_value[self::getKeyType($type)][$msg_key] = [$message];
         }
 
-        Buffer::getInstance()->system_msg = $current_value;
+        Buffer::getInstance()->set('system_msg', $current_value);
     }
 
     /**
@@ -179,12 +179,12 @@ class SystemMessage {
     {
         if (Buffer::getInstance()->system_msg === NULL) {
 
-            Buffer::getInstance()->system_msg = [
+            Buffer::getInstance()->set('system_msg', [
                 'error'   => [],
                 'warning' => [],
                 'success' => [],
                 'default' => [],
-            ];
+            ]);
         }
     }
 

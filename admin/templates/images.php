@@ -1,3 +1,5 @@
+<?php use framework\classes\Buffer; ?>
+
 <h4 class="mt-3 pl-3"><?= $this->langLine('images_head') ?></h4>
 <hr />
 
@@ -24,10 +26,10 @@
     </div>
 </form>
 
-<?php if ($this->buffer->bad_log): ?>
-    <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= $this->buffer->bad_log ?></div>
+<?php if (Buffer::getInstance()->bad_log): ?>
+    <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::getInstance()->bad_log ?></div>
 <?php endif; ?>
 
-<?php if ($this->buffer->good_log): ?>
-    <div class="mt-3 p-2 bg-success text-white text-center rounded"><?= $this->buffer->good_log ?></div>
+<?php if (Buffer::getInstance()->good_log): ?>
+    <div class="mt-3 p-2 bg-success text-white text-center rounded"><?= Buffer::getInstance()->good_log ?></div>
 <?php endif; ?>

@@ -9,7 +9,7 @@
 
 namespace admin\controllers;
 
-use framework\classes\Controller;
+use framework\classes\{Controller, Buffer};
 use framework\modules\storage\Storage;
 
 
@@ -18,10 +18,6 @@ class Visitlog extends Controller {
     public function __construct()
     {
         parent::__construct();
-
-        if (!$this->isAdminAuth() && !$this->isRootAuth()) {
-            $this->url::redirect(SITE . 'login');
-        }
     }
 
     public function index()
@@ -46,7 +42,7 @@ class Visitlog extends Controller {
             $logs[$fname] = $this->getDayLog($k);
         }
 
-        $this->buffer->logs = $logs;
+        Buffer::getInstance()->set('logs', $logs);
 
         $this->loadTemplate();
     }

@@ -1,3 +1,5 @@
+<?php use framework\classes\Buffer; ?>
+
 <style>
     .code-text {
         font-size: 13px;
@@ -63,7 +65,7 @@
 <hr />
 
 <div id="accordion">
-    <?php foreach ($this->buffer->logs as $k => $v): ?>
+    <?php foreach (Buffer::getInstance()->logs as $k => $v): ?>
         <div class="card mt-3">
             <div class="card-header" id="heading_<?= $k ?>">
                 <div class="p-0 m-0 bg-light text-secondary border"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_<?= $k ?>" aria-expanded="false" aria-controls="collapseOne"><?= $k ?></button></div>

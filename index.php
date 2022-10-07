@@ -14,7 +14,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 | Platform version ( Not change! Setting by author )
 +----------------------------------------------------------------------------------------------------
 */
-const VERSION = 'NothingExtra v.4.0.0';
+const VERSION = 'NothingExtra v.1.1.0';
 
 /*
 +----------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ $cfg_storage = [];
 +----------------------------------------------------------------------------------------------------
 */
 $cfg_storage['options'] = (include ROOT . 'config'. DIRECTORY_SEPARATOR . 'options' . EXT)['options'];
-Buffer::getInstance()->framework_cfg = $cfg_storage;
+Buffer::getInstance()->set('framework_cfg', $cfg_storage);
 
 /*
 +----------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ if (file_exists(ROOT . 'vendor/illuminate/database/Capsule/Manager.php')) {
 
     $dbObj->setAsGlobal();
 
-    Buffer::getInstance()->framework_cfg = $cfg_storage;
+    Buffer::getInstance()->set('framework_cfg', $cfg_storage);
 }
 
 /*
@@ -119,16 +119,8 @@ if (file_exists(ROOT . 'vendor/swiftmailer/swiftmailer/lib/classes/Swift/SmtpTra
     }
 
     $cfg_storage['mailer_factory'] = $mailer;
-    Buffer::getInstance()->framework_cfg = $cfg_storage;
+    Buffer::getInstance()->set('framework_cfg', $cfg_storage);
 }
-
-/*
-+----------------------------------------------------------------------------------------------------
-| Routing config settings
-+----------------------------------------------------------------------------------------------------
-*/
-$cfg_storage['routes'] = (include ROOT . 'config'. DIRECTORY_SEPARATOR . 'routing' . EXT)['routes'];
-Buffer::getInstance()->framework_cfg = $cfg_storage;
 
 /*
 +----------------------------------------------------------------------------------------------------
@@ -144,7 +136,7 @@ foreach ($configs as $file) {
     $cfg_storage[str_ireplace(EXT, '', $file)] = include ROOT . 'config' . DIRECTORY_SEPARATOR . $file;
 }
 
-Buffer::getInstance()->framework_cfg = $cfg_storage;
+Buffer::getInstance()->set('framework_cfg', $cfg_storage);
 
 /*
 +----------------------------------------------------------------------------------------------------

@@ -17,11 +17,7 @@ class Home extends Controller {
     {
         parent::__construct();
 
-        if (!$this->isAdminAuth() && !$this->isRootAuth()) {
-            $this->url::redirect(SITE . 'login');
-        }
-
-        $this->url::redirect(SITE . 'license');
+        redirect(SITE . 'license');
     }
 
     public function index()

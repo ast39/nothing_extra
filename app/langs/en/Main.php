@@ -34,6 +34,6 @@ class Main extends Lang {
     # protected $main_description = '';
 
     # тим можно перекрыть все настройки и это будет приоритетом #1 сли написать в контроллере:
-    # $this->buffer->extra_title = '';
-    # $this->buffer->extra_description = '';
+    # Buffer::getInstance()->extra_title = '';
+    # Buffer::getInstance()->extra_description = '';
 }

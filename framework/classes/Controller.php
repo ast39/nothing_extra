@@ -11,40 +11,23 @@ namespace framework\classes;
 
 class Controller {
 
-    public $benchmark;
-    public $buffer;
-    public $log;
-    public $url;
-
     protected $component = false;
 
     protected $auth      = false;
 
     public function __construct()
     {
-        $this->benchmark = Benchmark::getInstance();
-        $this->benchmark->addMark('_controller_start_');
+        Benchmark::getInstance()->addMark('_controller_start_');
 
         $this->checkSession();
-
-        $this->buffer    = Buffer::getInstance();
-        $this->log       = Log::getInstance();
-        $this->url       = new Route();
 
         SystemMessage::recoveryMessages();
         
         if ($this->auth !== false && !$this->isUserAuth()) {
-            Route::redirect(SITE . config('options.login_page'));
+            redirect(SITE . config('options.login_page'));
         }
 
         $this->csrfGen();
-    }
-
-    protected function goTo404()
-    {
-        header("HTTP/1.1 404 Not Found");
-        include_once ROOT . '404.php';
-        exit;
     }
 
     protected function csrfGen($replace = false)
@@ -70,7 +53,8 @@ class Controller {
         $csrf_post    = Request::post('csrf') ?? NULL;
 
         if ($csrf_session !== $csrf_post) {
-            $this->goTo404();
+            NE::logSystemError('CSRF token is absent', 'error');
+            goTo404();
         }
     }
 
@@ -111,7 +95,7 @@ class Controller {
      */
     protected function loadTemplate($name = false)
     {
-        $this->benchmark->addMark('_template_load_start_');
+        Benchmark::getInstance()->addMark('_template_load_start_');
 
         $name = $name == false ? 'main_template' : $name;
 
@@ -151,7 +135,7 @@ class Controller {
 
             extract($vars);
             array_walk($vars, function ($value, $key) {
-                $this->buffer->$key = $value;
+                Buffer::getInstance()->set($key, $value);
             });
 
             include ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . EXT;
@@ -226,7 +210,7 @@ class Controller {
         if (session_id() && !isAjax() && PAGE != 'login' && !$this->component) {
 
             $_SESSION[config('options.session_array')]['lastPage']     = Session::get('currentPage') ?? null;
-            $_SESSION[config('options.session_array')]['currentPage']  = Route::fullUrl();
+            $_SESSION[config('options.session_array')]['currentPage']  = Url::siteRoot();
 
             Session::set(time(), 'lastActivity');
         }

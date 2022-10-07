@@ -9,7 +9,7 @@
 
 namespace admin\controllers;
 
-use framework\classes\Controller;
+use framework\classes\{Controller, Buffer};
 use framework\modules\storage\Storage;
 
 
@@ -18,10 +18,6 @@ class Errorlog extends Controller {
     public function __construct()
     {
         parent::__construct();
-
-        if (!$this->isRootAuth()) {
-            $this->url::redirect(SITE . 'login');
-        }
     }
 
     public function index()
@@ -38,7 +34,7 @@ class Errorlog extends Controller {
             $logs[$file] = $this->getDayLog($file);
         }
 
-        $this->buffer->logs = $logs;
+        Buffer::getInstance()->set('logs', $logs);
 
         $this->loadTemplate();
     }

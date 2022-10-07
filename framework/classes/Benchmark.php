@@ -78,7 +78,7 @@ class Benchmark {
 
     public function __get($name)
     {
-        return $this->buffer[$name] ?? null;
+        return $this->marks[$name] ?? null;
     }
 
     protected function __clone() {}

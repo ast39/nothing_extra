@@ -9,7 +9,7 @@
 
 namespace admin\controllers;
 
-use framework\classes\{Controller, Request};
+use framework\classes\{Controller, Buffer, Request};
 
 
 class Management extends Controller {
@@ -17,15 +17,11 @@ class Management extends Controller {
     public function __construct()
     {
         parent::__construct();
-
-        if (!$this->isAdminAuth() && !$this->isRootAuth()) {
-            $this->url::redirect(SITE . 'login');
-        }
     }
 
     public function index()
     {
-        $this->url::redirect(SITE);
+        redirect(SITE);
     }
 
     public function robots()
@@ -34,14 +30,14 @@ class Management extends Controller {
 
             $text = Request::post('robots');
             if (file_put_contents(ROOT . 'robots.txt', ltrim($text))) {
-                $this->buffer->good_log = $this->langLine('manage_scs_1');
+                Buffer::getInstance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
-                $this->buffer->bad_log = $this->langLine('manage_err_1');
+                Buffer::getInstance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
         
         $data = file(ROOT . 'robots.txt');
-        $this->buffer->data = implode('', $data);
+        Buffer::getInstance()->set('data', implode('', $data));
 
         $this->loadTemplate();
     }
@@ -52,18 +48,18 @@ class Management extends Controller {
 
             $text = Request::post('sitemap');
             if (file_put_contents(ROOT . 'sitemap.xml', ltrim($text))) {
-                $this->buffer->good_log = $this->langLine('manage_scs_1');
+                Buffer::getInstance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
-                $this->buffer->bad_log = $this->langLine('manage_err_1');
+                Buffer::getInstance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
 
         if (!file_exists(ROOT . 'sitemap.xml')) {
-            $this->buffer->bad_log = 'Файл sitemap.xml не создан';
+            Buffer::getInstance()->set('bad_log', 'Файл sitemap.xml не создан');
         } else {
 
             $data = file(ROOT . 'sitemap.xml');
-            $this->buffer->data = implode('', $data);
+            Buffer::getInstance()->set('data', implode('', $data));
         }
         
         $this->loadTemplate();
@@ -72,66 +68,23 @@ class Management extends Controller {
     public function htaccess()
     {
         if (!$this->isRootAuth()) {
-            $this->url::redirect(SITE . 'login');
+            redirect(SITE . 'login');
         }
 
         if (Request::issetPost('htaccess')) {
             $text = Request::post('htaccess');
 
             if (file_put_contents(ROOT . '.htaccess', ltrim($text))) {
-                $this->buffer->good_log = $this->langLine('manage_scs_1');
+                Buffer::getInstance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
-                $this->buffer->bad_log = $this->langLine('manage_err_1');
+                Buffer::getInstance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
 
         $data = file(ROOT . '.htaccess');
-        $this->buffer->data = implode('', $data);
+        Buffer::getInstance()->set('data', implode('', $data));
 
         $this->loadTemplate();
     }
 
-    public function status()
-    {
-        if (Request::issetPost('change_status')) {
-
-            $new_status = Request::post('site_status');
-            $lines  = file(ROOT . 'cfg' . DIRECTORY_SEPARATOR . 'SystemSettings' . EXT);
-
-            foreach ($lines as $line_num => $line) {
-                
-                if (strpos($line, 'site_stop') !== false) {
-
-                    $site_status = trim(strrchr($line, '='));
-                    $site_status = strpos($site_status, 'false') !== false ? 1 : 0;
-
-                    if ($site_status == $new_status) {
-                        $this->buffer->good_log = $this->langLine('manage_err_2');
-                    } else {
-                        $site_status == 1
-                            ? $lines = str_replace('public static $site_stop = false;', 'public static $site_stop = true;', $lines)
-                            : $lines = str_replace('public static $site_stop = true;', 'public static $site_stop = false;', $lines);
-
-                        file_put_contents(ROOT . 'cfg' . DIRECTORY_SEPARATOR . 'SystemSettings' . EXT, $lines);
-                        $this->buffer->good_log = $this->langLine('manage_scs_2');
-                    }
-                }
-            }
-        }
-
-        $lines  = file(ROOT . 'cfg' . DIRECTORY_SEPARATOR . 'SystemSettings' . EXT);
-        foreach ($lines as $line_num => $line) {
-
-            if (strpos($line, 'site_stop') !== false) {
-
-                $status = trim(strrchr($line, '='));
-                $this->buffer->site_status = strpos($status, 'false') !== false ? 1 : 0;
-
-                break;
-            }
-
-        }
-
-        $this->loadTemplate();
-    }
 }

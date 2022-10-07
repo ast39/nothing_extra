@@ -23,6 +23,6 @@ class Logout extends Controller {
         session_unset();
         session_destroy();
 
-        $this->url::redirect(SITE);
+        redirect(SITE);
     }
 }
