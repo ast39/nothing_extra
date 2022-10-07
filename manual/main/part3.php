@@ -7,20 +7,12 @@
         <td class="text-left">Основная кодировка проекта</td>
     </tr>
     <tr>
-        <td class="text-left"><code>protocol</code></td>
-        <td class="text-left">Протокол сайта</td>
-    </tr>
-    <tr>
         <td class="text-left"><code>site_dir</code></td>
         <td class="text-left">Если сайт в каталоге</td>
     </tr>
     <tr>
         <td class="text-left"><code>site_stop</code></td>
         <td class="text-left">Экстренно остановить (закрыть) сайт</td>
-    </tr>
-    <tr>
-        <td class="text-left"><code>multi_lang</code></td>
-        <td class="text-left">Опция мультиязычного проекта</td>
     </tr>
     <tr>
         <td class="text-left"><code>production</code></td>
@@ -45,10 +37,6 @@
     <tr>
         <td class="text-left"><code>admin_partition</code></td>
         <td class="text-left">URL для доступа к админке</td>
-    </tr>
-    <tr>
-        <td class="text-left"><code>def_lang</code></td>
-        <td class="text-left">Язык сайта по умолчанию ( для мультиязычной опции )</td>
     </tr>
     <tr>
         <td class="text-left"><code>def_page</code></td>
@@ -109,6 +97,10 @@
     <tr>
         <td class="text-left"><code>public_mail</code></td>
         <td class="text-left">Почта для вывода клиентам сайта</td>
+    </tr>
+    <tr>
+        <td class="text-left"><code>def_lang</code></td>
+        <td class="text-left">Язык сайта по умолчанию ( для мультиязычной опции )</td>
     </tr>
     <tr>
         <td class="text-left"><code>site_langs</code></td>

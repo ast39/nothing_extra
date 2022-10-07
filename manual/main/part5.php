@@ -1,5 +1,4 @@
 <div class="p-3 pl-5 mb-2 bg-secondary text-white">Новая страница</div>
-
 <div class="text-secondary bg-light border font-weight-normal p-1 pl-5 mb-2">Контроллер</div>
 <div class="code_block mb-2">
     <ol>

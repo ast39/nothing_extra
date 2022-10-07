@@ -46,10 +46,6 @@
         <td class="text-left">Корень сайта ( в URL системе ) для статических файлов</td>
     </tr>
     <tr>
-        <td class="text-left"><code>ERRORS</code></td>
-        <td class="text-left">Выводить ли ошибки</td>
-    </tr>
-    <tr>
         <td class="text-left"><code>EXT</code></td>
         <td class="text-left">Расширение файлов проекта ( в основном <code>.php</code> )</td>
     </tr>
@@ -68,10 +64,6 @@
     <tr>
         <td class="text-left"><code>PAGE_QUERY</code></td>
         <td class="text-left">Параметры, передаваемые в URL для страницы</td>
-    </tr>
-    <tr>
-        <td class="text-left"><code>SITE_QUERY</code></td>
-        <td class="text-left">Параметры, передаваемые в URL сайту</td>
     </tr>
     <tr>
         <td class="text-left"><code>MSG_DEFAULT</code></td>

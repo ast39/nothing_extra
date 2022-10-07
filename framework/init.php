@@ -135,9 +135,9 @@ const MSG_ERROR   = 3;
 +----------------------------------------------------------------------------------------------------
 */
 if (file_exists(publicPath() . 'install.php') && !Url::isAdminPanel()) {
-//    require_once publicPath() . 'install.php';
-//
-//    die;
+    require_once publicPath() . 'install.php';
+
+    die;
 }
 
 /*

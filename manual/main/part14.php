@@ -30,14 +30,6 @@
             <td class="text-left">Конвертация XML в массив</td>
         </tr>
         <tr>
-            <td class="text-left"><code>noController($page)</code></td>
-            <td class="text-left">Вызвать 404 ошибку - страница не найдна (контроллер)</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code>noMethod($page)</code></td>
-            <td class="text-left">Вызвать 404 ошибку - страница не найдна (метод)</td>
-        </tr>
-        <tr>
             <td class="text-left"><code>config($key = null, $default = null)</code></td>
             <td class="text-left">Получить значение из конфигурационного файла</td>
         </tr>
@@ -48,6 +40,14 @@
         <tr>
             <td class="text-left"><code>frameworkPath($page)</code></td>
             <td class="text-left">Путь до папки фрэймворка</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>redirect(string $url, int $code = 302)</code></td>
+            <td class="text-left">Редирект на указанный URL</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>goTo404($page)</code></td>
+            <td class="text-left">Отправить на 404 страницу</td>
         </tr>
     </tbody>
 </table>

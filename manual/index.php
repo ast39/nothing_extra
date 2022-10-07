@@ -34,7 +34,7 @@ if (!isset($_GET['part'])) {
             box-shadow: inset 47px 0 0 #fbfbfc, inset 48px 0 0 #ececf0;
             font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace!important;
             color: #333;
-            font-size: 12px;
+            font-size: 13px;
             display: block;
             line-height: 16px;
         }

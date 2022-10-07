@@ -18,6 +18,10 @@
         <td class="text-left">Каталог c текстами приложения</td>
     </tr>
     <tr>
+        <td class="text-left"><code>\app\middlewares</code></td>
+        <td class="text-left">Каталог с миддлвэрами</td>
+    </tr>
+    <tr>
         <td class="text-left"><code>\app\models</code></td>
         <td class="text-left">Каталог c классами приложения</td>
     </tr>
@@ -56,6 +60,10 @@
     <tr>
         <td class="text-left"><code>\public\img</code></td>
         <td class="text-left">Каталог медиа-файлов</td>
+    </tr>
+    <tr>
+        <td class="text-left"><code>\routes</code></td>
+        <td class="text-left">Каталог с настройками роутингов</td>
     </tr>
     <tr>
         <td class="text-left"><code>\storage</code></td>
