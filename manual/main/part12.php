@@ -17,12 +17,40 @@
             <td class="text-left">Класс для кэширования информации</td>
         </tr>
         <tr>
+            <td class="text-left"><code>\framework\classes\Censure</code></td>
+            <td class="text-left">Класс цензуры текста</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\Cloud</code></td>
+            <td class="text-left">Класс проводник по файловой структуре</td>
+        </tr>
+        <tr>
             <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1204">\framework\classes\Component</a></code></td>
             <td class="text-left">Класс, запускающий компонент</td>
         </tr>
         <tr>
             <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1205">\framework\classes\Controller</a></code></td>
             <td class="text-left">Основной класс, запускающий выполнение страницы</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\Crypt</code></td>
+            <td class="text-left">Класс шифрования / дешифрования</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\CSV</code></td>
+            <td class="text-left">Класс получения / записи данных в CSV файлы</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\DataBuilder</code></td>
+            <td class="text-left">Класс работы с данными</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\Date</code></td>
+            <td class="text-left">Класс работы с датой и временем</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\Error</code></td>
+            <td class="text-left">Класс вывода ошибок</td>
         </tr>
         <tr>
             <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1206">\framework\classes\Lang</a></code></td>
@@ -33,59 +61,43 @@
             <td class="text-left">Класс работы с логированием</td>
         </tr>
         <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1208">\framework\classes\Route</a></code></td>
-            <td class="text-left">Класс работы с URL</td>
+            <td class="text-left"><code>\framework\classes\RegExp</code></td>
+            <td class="text-left">Класс для валидации по <code>RegExp</code></td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\Request</code></td>
+            <td class="text-left">Класс для безопасного получения <code>Request</code> данных</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\Routing</code></td>
+            <td class="text-left">Системный класс маршрутизации</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code\framework\classes\Session</code></td>
+            <td class="text-left">Класс для простой работы с сессией</td>
         </tr>
         <tr>
             <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1210">\framework\classes\SiteIndexing</a></code></td>
             <td class="text-left">Класс определения юера, браузера, устройства и т.д.</td>
         </tr>
         <tr>
+            <td class="text-left"><code>\framework\classes\SoapNative</code></td>
+            <td class="text-left">Класс для расширения работы с Soap Client</td>
+        </tr>
+        <tr>
             <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1214">\framework\classes\SystemMessage</a></code></td>
             <td class="text-left">Класс работы с уведомлениями</td>
         </tr>
         <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1211">\framework\classes\SoapNative</code></td>
-            <td class="text-left">Класс для расширения работы с Soap Client</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1301">\framework\classes\DataBuilder</a></code></td>
-            <td class="text-left">Класс работы с данными</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1302">\framework\classes\Censure</a></code></td>
-            <td class="text-left">Класс цензуры текста</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1303">\framework\classes\Crypt</a></code></td>
-            <td class="text-left">Класс шифрования / дешифрования</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1304">\framework\classes\CSV</a></code></td>
-            <td class="text-left">Класс получения / записи данных в CSV файлы</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1305">\framework\classes\Date</a></code></td>
-            <td class="text-left">Класс работы с датой и временем</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1307">\framework\classes\RegExp</a></code></td>
-            <td class="text-left">Класс для валидации по <code>RegExp</code></td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1308">\framework\classes\Request</a></code></td>
-            <td class="text-left">Класс для безопасного получения <code>Request</code> данных</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1309">\framework\classes\Session</a></code></td>
-            <td class="text-left">Класс для простой работы с сессией</td>
-        </tr>
-        <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1310">\framework\classes\Text</a></code></td>
+            <td class="text-left"><code>\framework\classes\Text</code></td>
             <td class="text-left">Класс для работы с текстом</td>
         </tr>
         <tr>
-            <td class="text-left"><code><a class="text-primary" href="/manual/index.php?part=<?= $_GET['part'] ?>&add=1311">\framework\classes\Validator</a></code></td>
+            <td class="text-left"><code>\framework\classes\Url</code></td>
+            <td class="text-left">Класс работы с URI</td>
+        </tr>
+        <tr>
+            <td class="text-left"><code>\framework\classes\Validator</code></td>
             <td class="text-left">Класс валидации по <code>filter_var()</code></td>
         </tr>
         </tbody>

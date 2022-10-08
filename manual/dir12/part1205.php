@@ -21,13 +21,6 @@
         </li>
         <li></li>
         <li>
-            <span class="comment">// Редирект на 404 страницу с отправкой заголовка</span>
-        </li>
-        <li>
-            <span class="line_code"><span class="variable">$this</span>->goTo404();</span>
-        </li>
-        <li></li>
-        <li>
             <span class="comment">// Сгенерировать CSRF-токен в сессии (автоматически гененрируется в движке)</span>
         </li>
         <li>
