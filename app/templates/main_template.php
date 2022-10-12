@@ -17,8 +17,8 @@
 
     <script src="<?= Url::js('script') ?>"></script>
 
-    <title><?= Buffer::getInstance()->extra_title ?? $this->pageTitle() ?></title>
-    <meta name="description" content="<?= Buffer::getInstance()->extra_description ?? $this->pageDescription() ?>">
+    <title><?= Buffer::instance()->extra_title ?? $this->pageTitle() ?></title>
+    <meta name="description" content="<?= Buffer::instance()->extra_description ?? $this->pageDescription() ?>">
 </head>
 <body>
     <div class="container">

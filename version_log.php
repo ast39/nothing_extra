@@ -19,11 +19,13 @@
             </span>
         </div>
         <div class="card-body">
-            <h5 class="text-success">SC Версия 1.1.0</h5>
+            <h5 class="text-success">SC Версия 0.8.1</h5>
             <ul class="mt-3">
                 <li>Полностю изменен роутинга</li>
                 <li>Добавлен модуль для работы с хранилищем <code>modules\storage</code></li>
                 <li>Добавлен модуль для работы с телеграм ботом <code>modules\telegram</code></li>
+                <li>Добавлен модуль для создания DI контейнеров <code>php-di/php-di</code></li>
+                <li>Добавлен модуль для логирования <code>monolog/monolog</code></li>
                 <li>Изменена работа с логированием системных ошибок и визитов</li>
                 <li>Общие правки по движку и улучшение</li>
             </ul>

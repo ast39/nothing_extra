@@ -41,14 +41,14 @@ class Images extends Controller {
             $new_file = Request::file('new_file');
 
             if ($new_file['error'] > 0) {
-                Buffer::getInstance()->set('bad_log', $this->langLine('images_err_1'));
+                Buffer::instance()->set('bad_log', $this->langLine('images_err_1'));
 
                 $this->index();
                 die;
             }
 
             if ($new_file['size'] > ($this->max_size * 1024 * 1024)) {
-                Buffer::getInstance()->set('bad_log', $this->langLine('images_err_2') . $this->max_size . ' MB');
+                Buffer::instance()->set('bad_log', $this->langLine('images_err_2') . $this->max_size . ' MB');
 
                 $this->index();
                 die;
@@ -57,7 +57,7 @@ class Images extends Controller {
             $info = getimagesize($new_file['tmp_name']);
 
             if (!in_array($info['mime'], $this->mime_upload)) {
-                Buffer::getInstance()->set('bad_log', $this->langLine('images_err_3'));
+                Buffer::instance()->set('bad_log', $this->langLine('images_err_3'));
 
                 $this->index();
                 die;
@@ -78,12 +78,12 @@ class Images extends Controller {
             if (is_uploaded_file($new_file['tmp_name'])) {
 
                 move_uploaded_file($new_file['tmp_name'], $path);
-                Buffer::getInstance()->set('good_log', $this->langLine('images_scs') . $this->new_name . '" )');
+                Buffer::instance()->set('good_log', $this->langLine('images_scs') . $this->new_name . '" )');
 
                 $this->index();
                 die;
             } else {
-                Buffer::getInstance()->set('bad_log', $this->langLine('images_err_4'));
+                Buffer::instance()->set('bad_log', $this->langLine('images_err_4'));
 
                 $this->index();
                 die;

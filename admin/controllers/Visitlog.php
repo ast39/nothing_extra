@@ -42,7 +42,7 @@ class Visitlog extends Controller {
             $logs[$fname] = $this->getDayLog($k);
         }
 
-        Buffer::getInstance()->set('logs', $logs);
+        Buffer::instance()->set('logs', $logs);
 
         $this->loadTemplate();
     }

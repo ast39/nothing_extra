@@ -17,7 +17,7 @@ class Controller {
 
     public function __construct()
     {
-        Benchmark::getInstance()->addMark('_controller_start_');
+        Benchmark::instance()->addMark('_controller_start_');
 
         $this->checkSession();
 
@@ -95,14 +95,14 @@ class Controller {
      */
     protected function loadTemplate($name = false)
     {
-        Benchmark::getInstance()->addMark('_template_load_start_');
+        Benchmark::instance()->addMark('_template_load_start_');
 
         $name = $name == false ? 'main_template' : $name;
 
-        $general_folder = defined('ADMIN') ? 'admin' : 'app';
+        $general_folder = Url::isAdminPanel() ? 'admin' : 'app';
 
-        if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . EXT)) {
-            include_once ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . EXT;
+        if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . '.php')) {
+            include_once ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . '.php';
         }
     }
 
@@ -116,9 +116,9 @@ class Controller {
         }
         $class_name = implode('\\', $name_parts);
 
-        $general_folder = defined('ADMIN') ? 'admin' : 'app';
+        $general_folder = Url::isAdminPanel() ? 'admin' : 'app';
 
-        $namespace_class = defined('ADMIN')
+        $namespace_class = Url::isAdminPanel()
             ? "\\admin\\controllers\\components\\" . $class_name
             : "\\app\\controllers\\components\\" . $class_name;
 
@@ -131,14 +131,14 @@ class Controller {
                 ? $page->$method()
                 : call_user_func_array([$page, $method], $vars);
 
-        } else if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . EXT)) {
+        } else if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . '.php')) {
 
             extract($vars);
             array_walk($vars, function ($value, $key) {
-                Buffer::getInstance()->set($key, $value);
+                Buffer::instance()->set($key, $value);
             });
 
-            include ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . EXT;
+            include ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . '.php';
         }
     }
 
@@ -179,22 +179,22 @@ class Controller {
     {
         # Для начала получим резервный вариант для дефолтного языка
         # Путь до файла с текстом для дефолтного языка
-        $namespace_lang_def = defined('ADMIN')
+        $namespace_lang_def = Url::isAdminPanel()
             ? "\\admin\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main')
             : "\\app\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main');
 
-        $lang_class_def = $namespace_lang_def::getInstance();
+        $lang_class_def = $namespace_lang_def::instance();
         $result_def     = property_exists($lang_class_def, $name)
             ? $lang_class_def->$name
             : null;
 
         # Теперь попробуем получить вариант для текущего языка
         # Путь до файла с текстом исходя из выбранного языка
-        $namespace_lang = defined('ADMIN')
+        $namespace_lang = Url::isAdminPanel()
             ? "\\admin\\langs\\" . strtolower(LANG) . '\\' . ucfirst($file ?: 'main')
             : "\\app\\langs\\" . strtolower(LANG) . '\\' . ucfirst($file ?: 'main');
 
-        $lang_class = $namespace_lang::getInstance();
+        $lang_class = $namespace_lang::instance();
         $result     = property_exists($lang_class, $name)
             ? $lang_class->$name
             : null;

@@ -1,20 +1,15 @@
 <?php
 
-// Sanity check, install should only be checked from index.php
 defined('VERSION') or exit('Install tests must be loaded from within index.php!');
 
 $failed = FALSE;
-
-include_once frameworkPath() . 'autoloader.php';
-
-use framework\classes\Url;
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="<?= config('options.charset', 'utf-8') ?>">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -28,7 +23,6 @@ use framework\classes\Url;
     <div class="row mt-3">
         <div class="offset-xl-1 col-xl-10 col-lg-12 col-sm-12 col-md-12">
             <div class="card bg-light mb-3">
-                <img class="card-img-top" src="<?= Url::img('system/install.png') ?>" alt="Card image cap">
                 <div class="card-header text-center border-top">
                     <h5>Nothing Extra | Ничего лишнего</h5>
                 </div>
@@ -40,7 +34,7 @@ use framework\classes\Url;
                     </tr>
                     <tr>
                         <td class="text-left">Список изменений</td>
-                        <td class="text-right text-success"><code><a href="/<?= config('options.site_dir') ?>version_log.php">Посмотреть</a></code></td>
+                        <td class="text-right text-success"><code><a href="/version_log.php">Посмотреть</a></code></td>
                     </tr>
                     </tbody>
                 </table>
@@ -109,9 +103,6 @@ use framework\classes\Url;
                 <div class="card-header text-center border-top">
                     <h5>Тест на целостность окружения</h5>
                 </div>
-                <div class="card-body">
-                    Следующие расширения устанавливаются через <code>composer</code>, они необходимы для полноценного функционирования <code>NothingExtra Framevork</code>.
-                </div>
 
                 <table class="table">
                     <tbody>
@@ -121,38 +112,6 @@ use framework\classes\Url;
                             <td class="text-right text-success">Отлично</td>
                         <?php else: $failed = TRUE ?>
                             <td class="text-right text-warning">Система не обнаружила <code>vendor/autoload</code>.</td>
-                        <?php endif ?>
-                    </tr>
-                    <tr>
-                        <td class="text-left">Работа с БД</td>
-                        <?php if (file_exists(__DIR__ . '/vendor/illuminate/database/Capsule/Manager.php')): ?>
-                            <td class="text-right text-success">Отлично</td>
-                        <?php else: $failed = TRUE ?>
-                            <td class="text-right text-warning">Вам необходимо установить <code>illuminate/database</code> для работы с БД.</td>
-                        <?php endif ?>
-                    </tr>
-                    <tr>
-                        <td class="text-left">Работа с кэшером</td>
-                        <?php if (file_exists(__DIR__ . '/vendor/symfony/cache/Adapter/FilesystemAdapter.php')): ?>
-                            <td class="text-right text-success">Отлично</td>
-                        <?php else: $failed = TRUE ?>
-                            <td class="text-right text-warning">Вам необходимо установить <code>symfony/cache</code> для работы с кэшером.</td>
-                        <?php endif ?>
-                    </tr>
-                    <tr>
-                        <td class="text-left">Работа с почтой</td>
-                        <?php if (file_exists(__DIR__ . '/vendor/swiftmailer/swiftmailer/lib/classes/Swift/SmtpTransport.php')): ?>
-                            <td class="text-right text-success">Отлично</td>
-                        <?php else: $failed = TRUE ?>
-                            <td class="text-right text-warning">Вам необходимо установить <code>swiftmailer/swiftmailer</code> для работы с почтой.</td>
-                        <?php endif ?>
-                    </tr>
-                    <tr>
-                        <td class="text-left">Работа с АПИ</td>
-                        <?php if (file_exists(__DIR__ . '/vendor/guzzlehttp/guzzle/src/Client.php')): ?>
-                            <td class="text-right text-success">Отлично</td>
-                        <?php else: $failed = TRUE ?>
-                            <td class="text-right text-warning">Вам необходимо установить <code>guzzlehttp/guzzle</code> для работы с АПИ.</td>
                         <?php endif ?>
                     </tr>
                     </tbody>
@@ -208,14 +167,6 @@ use framework\classes\Url;
                         <?php endif ?>
                     </tr>
                     <tr>
-                        <td class="text-left">Поддержка mcrypt</td>
-                        <?php if (extension_loaded('mcrypt')): ?>
-                            <td class="text-right text-success">Отлично</td>
-                        <?php else: ?>
-                            <td class="text-right text-warning">Рекомендуем установить <a href="http://php.net/mcrypt">mcrypt</a> для работы с шифрованием.</td>
-                        <?php endif ?>
-                    </tr>
-                    <tr>
                         <td class="text-left">Поддержка GD</td>
                         <?php if (function_exists('gd_info')): ?>
                             <td class="text-right text-success">Отлично</td>
@@ -231,17 +182,14 @@ use framework\classes\Url;
                         <li class="list-group-item text-danger">✘ NothingExtra не может корректно работать в вашей системе.</li>
                     <?php else: ?>
                         <li class="list-group-item text-success">✔ Ваша система прошла все требования.</li>
-                        <li class="list-group-item">Удалите или переименуйте <code>install<?= EXT ?></code> в корне.</span></li>
+                        <li class="list-group-item">Удалите или переименуйте <code>install.php</code> в корне.</span></li>
                     <?php endif; ?>
                 </ul>
                 <div class="card-footer text-muted text-center">
-                    Рекомендуем ознакомиться с <a href="/<?= config('options.site_dir') ?>manual/">руководством</a> к фрэймворку
+                    Рекомендуем ознакомиться с <a href="/>manual/">руководством</a> к фрэймворку
                 </div>
                 <div class="card-footer text-muted text-center">
-                    Так же Вы можете перейти в <a href="/<?= config('options.site_dir') ?><?= config('options.admin_partition') ?>">админку</a> фрэймворка
-                </div>
-                <div class="card-footer text-muted text-center">
-                    Скачать <a href="/<?= config('options.site_dir') ?>xc2022.rar" download>архив</a> последней версии NothingExtra
+                    Скачать <a href="/ne.0.8.1.rar" download>архив</a> последней версии NothingExtra
                 </div>
             </div>
         </div>

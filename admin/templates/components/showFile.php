@@ -9,14 +9,14 @@
     </div>
 
     <div class="col-12 mt-3">
-        <?php if (Buffer::getInstance()->file_type === 'img'): ?>
-            <img width="100%" class="img-thumbnail" alt="image" style="cursor: pointer" src="<?= Buffer::getInstance()->file_url ?>" />
-        <?php elseif (Buffer::getInstance()->file_type === 'pdf'): ?>
-            <embed src="<?= Buffer::getInstance()->file_url ?>" type="application/pdf" width="100%" height="800">
+        <?php if (Buffer::instance()->file_type === 'img'): ?>
+            <img width="100%" class="img-thumbnail" alt="image" style="cursor: pointer" src="<?= Buffer::instance()->file_url ?>" />
+        <?php elseif (Buffer::instance()->file_type === 'pdf'): ?>
+            <embed src="<?= Buffer::instance()->file_url ?>" type="application/pdf" width="100%" height="800">
         <?php else: ?>
             <div class="form-group">
                 <textarea id="code" name="code" readonly class="form-control" rows="16">
-                    <?= implode('', file(Buffer::getInstance()->file)) ?>
+                    <?= implode('', file(Buffer::instance()->file)) ?>
                 </textarea>
             </div>
         <?php endif; ?>
@@ -26,7 +26,7 @@
         <button type="button" class="btn btn-danger" onclick="window.location.href='<?= SITE ?>explorer/back/0'">Закрыть</button>
     </div>
 
-    <?php if (Buffer::getInstance()->error): ?>
-        <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::getInstance()->error ?></div>
+    <?php if (Buffer::instance()->error): ?>
+        <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::instance()->error ?></div>
     <?php endif; ?>
 </div>

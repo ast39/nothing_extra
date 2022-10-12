@@ -19,7 +19,7 @@
     <script src="<?= Url::js('jquery.gritter') ?>" type="text/javascript" charset="utf-8"></script>
     <link type="text/css" href="<?= Url::css('jquery.gritter') ?>" rel="stylesheet" />
 
-    <title><?= Buffer::getInstance()->extra_title ?? $this->pageTitle() ?></title>
+    <title><?= Buffer::instance()->extra_title ?? $this->pageTitle() ?></title>
 </head>
 <body>
 
@@ -65,10 +65,10 @@
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="<?= str_ireplace(config('options.admin_partition'), '', SITE) ?>"><?= $this->langLine('menu_project') ?></a>
+                    <a class="nav-link" target="_blank" href="<?= str_ireplace('/'. config('options.admin_partition'), '', SITE) ?>"><?= $this->langLine('menu_project') ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= str_ireplace(config('options.admin_partition'), '', SITE) . 'manual' ?>"><?= $this->langLine('menu_manual') ?></a>
+                    <a class="nav-link" href="<?= str_ireplace('/'. config('options.admin_partition'), '', SITE_FOR_STATIC) . 'manual' ?>"><?= $this->langLine('menu_manual') ?></a>
                 </li>
                 <?php if ($this->isRootAuth() || $this->isAdminAuth()): ?>
                     <li class="nav-item">

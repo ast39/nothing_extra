@@ -6,67 +6,30 @@
  * Time: 19:28
  */
 
-
 namespace framework\classes;
 
-use framework\modules\storage\Storage;
-use framework\traits\Singleton;
 
+use Monolog\Logger;
 
-class Log {
+class Log extends Logger {
 
-    use Singleton;
+    protected static $instance;
 
-    private $log_buffer = [];
-
-    public function cleanLog($name)
+    public static function instance()
     {
-        if (isset($this->log_buffer[$name])) {
-            $this->log_buffer[$name] = '';
-        }
+        return static::$instance ?? (static::$instance = static::initInstance());
     }
 
-    public function appendLog($name, $data)
+    private static function initInstance()
     {
-        isset ($this->log_buffer[$name])
-            ? $this->log_buffer[$name] .= $data
-            : $this->log_buffer[$name]  = $data;
+        return new Logger('logger');
     }
 
-    public function showLog($name)
+    public static function resetInstance(): void
     {
-        return $this->log_buffer[$name] ?? null;
+        static::$instance = null;
     }
 
-    public function saveLog($name, $clean_file = false): void
-    {
+    private function __clone() {}
 
-        if (($this->log_buffer[$name] ?? null) !== null) {
-
-            if (Storage::disk('public')->exists($name)) {
-
-                if ($clean_file) {
-                    Storage::disk('public')->delete($name);
-                } else {
-                    Storage::disk('public')->append($name, $this->log_buffer[$name]);
-                }
-            }
-
-            Storage::disk('public')->put($name, $this->log_buffer[$name]);
-        }
-    }
-
-    public function readLog($name, $json = false)
-    {
-        if (Storage::disk('public')->exists($name)) {
-
-            return $json
-                ? Storage::disk('public')->get($name)->toJson()
-                : Storage::disk('public')->get($name)->toArray();
-        }
-
-        return null;
-    }
-
-    protected function __clone() {}
 }

@@ -65,7 +65,7 @@
 <hr />
 
 <div id="accordion">
-    <?php foreach (Buffer::getInstance()->logs as $k => $v): ?>
+    <?php foreach (Buffer::instance()->logs as $k => $v): ?>
         <div class="card mt-3">
             <div class="card-header" id="heading_<?= $k ?>">
                 <div class="p-0 m-0 bg-light text-secondary border"><button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_<?= $k ?>" aria-expanded="false" aria-controls="collapseOne"><?= $k ?></button></div>

@@ -71,14 +71,14 @@ function xmlToArray($xml_string): array
 function config($key = null, $default = null)
 {
     if ($key == null) {
-        return Buffer::getInstance()->framework_cfg ?? $default;
+        return Buffer::instance()->framework_cfg ?? $default;
     }
 
     $keys    = explode('.', $key);
     $global  = count($keys) <= 1;
     $cfg_key = array_shift($keys);
 
-    $cfg_storage = Buffer::getInstance()->framework_cfg;
+    $cfg_storage = Buffer::instance()->framework_cfg;
 
     return $global
         ? $cfg_storage[$cfg_key] ?? $default
@@ -108,6 +108,6 @@ function redirect(string $url, int $code = 302): void
 function goTo404()
 {
     header($_SERVER['SERVER_PROTOCOL'] . " 404 Not Found");
-    include_once publicPath() . '404' . EXT;
+    include_once publicPath() . '404.php';
     exit;
 }

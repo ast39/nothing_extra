@@ -89,6 +89,7 @@ return [
         'site_langs' => [
 
             'ru',
+            'en',
         ],
 
     ],

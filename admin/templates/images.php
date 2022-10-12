@@ -26,10 +26,10 @@
     </div>
 </form>
 
-<?php if (Buffer::getInstance()->bad_log): ?>
-    <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::getInstance()->bad_log ?></div>
+<?php if (Buffer::instance()->bad_log): ?>
+    <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::instance()->bad_log ?></div>
 <?php endif; ?>
 
-<?php if (Buffer::getInstance()->good_log): ?>
-    <div class="mt-3 p-2 bg-success text-white text-center rounded"><?= Buffer::getInstance()->good_log ?></div>
+<?php if (Buffer::instance()->good_log): ?>
+    <div class="mt-3 p-2 bg-success text-white text-center rounded"><?= Buffer::instance()->good_log ?></div>
 <?php endif; ?>

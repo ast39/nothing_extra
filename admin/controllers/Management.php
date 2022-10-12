@@ -30,14 +30,14 @@ class Management extends Controller {
 
             $text = Request::post('robots');
             if (file_put_contents(ROOT . 'robots.txt', ltrim($text))) {
-                Buffer::getInstance()->set('good_log', $this->langLine('manage_scs_1'));
+                Buffer::instance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
-                Buffer::getInstance()->set('bad_log', $this->langLine('manage_err_1'));
+                Buffer::instance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
         
         $data = file(ROOT . 'robots.txt');
-        Buffer::getInstance()->set('data', implode('', $data));
+        Buffer::instance()->set('data', implode('', $data));
 
         $this->loadTemplate();
     }
@@ -48,18 +48,18 @@ class Management extends Controller {
 
             $text = Request::post('sitemap');
             if (file_put_contents(ROOT . 'sitemap.xml', ltrim($text))) {
-                Buffer::getInstance()->set('good_log', $this->langLine('manage_scs_1'));
+                Buffer::instance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
-                Buffer::getInstance()->set('bad_log', $this->langLine('manage_err_1'));
+                Buffer::instance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
 
         if (!file_exists(ROOT . 'sitemap.xml')) {
-            Buffer::getInstance()->set('bad_log', 'Файл sitemap.xml не создан');
+            Buffer::instance()->set('bad_log', 'Файл sitemap.xml не создан');
         } else {
 
             $data = file(ROOT . 'sitemap.xml');
-            Buffer::getInstance()->set('data', implode('', $data));
+            Buffer::instance()->set('data', implode('', $data));
         }
         
         $this->loadTemplate();
@@ -75,14 +75,14 @@ class Management extends Controller {
             $text = Request::post('htaccess');
 
             if (file_put_contents(ROOT . '.htaccess', ltrim($text))) {
-                Buffer::getInstance()->set('good_log', $this->langLine('manage_scs_1'));
+                Buffer::instance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
-                Buffer::getInstance()->set('bad_log', $this->langLine('manage_err_1'));
+                Buffer::instance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
 
         $data = file(ROOT . '.htaccess');
-        Buffer::getInstance()->set('data', implode('', $data));
+        Buffer::instance()->set('data', implode('', $data));
 
         $this->loadTemplate();
     }

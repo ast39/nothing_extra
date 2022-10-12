@@ -93,11 +93,11 @@ class Cloud {
 
         if (Session::get('good_log') != false) {
 
-            Buffer::getInstance()->set('good_log', Session::get('good_log'));
+            Buffer::instance()->set('good_log', Session::get('good_log'));
             Session::remove('good_log');
         } elseif (Session::get('bad_log') != false) {
 
-            Buffer::getInstance()->set('bad_log', Session::get('bad_log'));
+            Buffer::instance()->set('bad_log', Session::get('bad_log'));
             Session::remove('bad_log');
         }
 

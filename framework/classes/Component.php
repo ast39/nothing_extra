@@ -39,12 +39,12 @@ class Component extends Controller {
             ? $component
             : 'templates/components/' .  $name;
 
-        $this->benchmark->addMark('_template_load_start_');
+        Benchmark::instance()->addMark('_template_load_start_');
 
         $general_folder = defined('ADMIN') ? 'admin_panel' : 'project';
 
-        if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . $name . EXT)) {
-            include ROOT . $general_folder . DIRECTORY_SEPARATOR . $name . EXT;
+        if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . $name . '.php')) {
+            include ROOT . $general_folder . DIRECTORY_SEPARATOR . $name . '.php';
         }
     }
 }

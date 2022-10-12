@@ -37,8 +37,8 @@ class Routing {
      */
     public function findMatches():? bool
     {
-        include ROOT . 'routes' . DIRECTORY_SEPARATOR . 'admin' . EXT;
-        include ROOT . 'routes' . DIRECTORY_SEPARATOR . 'web' . EXT;
+        include ROOT . 'routes' . DIRECTORY_SEPARATOR . 'admin.php';
+        include ROOT . 'routes' . DIRECTORY_SEPARATOR . 'web.php';
 
         $this->requested_method = $this->getRequestMethod();
         $uri = $this->getCurrentUri();
@@ -85,45 +85,7 @@ class Routing {
     }
 
     /**
-     * Check route middlewares
-     *
-     * @return void
-     */
-    private function checkMiddlewares(): void
-    {
-        if (count($this->target_route['before'] ?? []) > 0) {
-
-            foreach ($this->target_route['before'] as $mw) {
-
-                $middleware = '\\app\\middlewares\\' . $mw;
-
-                try {
-                    $reflectedMethod = new \ReflectionMethod($middleware, 'handle');
-
-                    if ($reflectedMethod->isPublic() && (!$reflectedMethod->isAbstract())) {
-
-                        if ($reflectedMethod->isStatic()) {
-                            forward_static_call_array([$middleware, 'handle'], []);
-                        } else {
-
-                            if (\is_string($middleware)) {
-                                $middleware = new $middleware();
-                            }
-
-                            call_user_func_array([$middleware, 'handle'], []);
-                        }
-                    }
-                } catch (\ReflectionException $reflectionException) {
-
-                    NE::logSystemError($reflectionException, 'error');
-                    goTo404();
-                }
-            }
-        }
-    }
-
-    /**
-     * Run NE
+     * Выполнение экшена совпавшего роутинга или 404
      *
      * @param string $controller
      * @param string $method
@@ -135,7 +97,7 @@ class Routing {
         $this->checkMiddlewares();
 
         if ($this->getNamespace() !== '') {
-            $controller = $this->getNamespace() . '\\' . $controller;
+            $controller = $this->getNamespace() . '\\' . ucfirst(strtolower($controller));
         }
 
         try {
@@ -161,6 +123,13 @@ class Routing {
         }
     }
 
+    /**
+     * Группировка роутингов
+     *
+     * @param array $routeArgs
+     * @param $action
+     * @return void
+     */
     public function group(array $routeArgs, $action): void
     {
         $baseRoute         = $routeArgs['prefix'];
@@ -278,6 +247,11 @@ class Routing {
         }
     }
 
+    /**
+     * Метод текущего запроса
+     *
+     * @return mixed|string
+     */
     public function getRequestMethod()
     {
         $method = $_SERVER['REQUEST_METHOD'];
@@ -297,6 +271,11 @@ class Routing {
         return $method;
     }
 
+    /**
+     * Заголовки запроса
+     *
+     * @return array|false|string
+     */
     public function getRequestHeaders()
     {
         $headers = [];
@@ -319,6 +298,11 @@ class Routing {
         return $headers;
     }
 
+    /**
+     * Текущий URL
+     *
+     * @return string
+     */
     public function getCurrentUri()
     {
         $uri = substr(rawurldecode($_SERVER['REQUEST_URI']), strlen($this->getBasePath()));
@@ -338,6 +322,11 @@ class Routing {
         return '/' . trim($uri, '/');
     }
 
+    /**
+     * Текущий язык
+     *
+     * @return mixed|null
+     */
     public function getLang()
     {
         if (count(config('options.site_langs') ?? []) < 2) {
@@ -353,6 +342,11 @@ class Routing {
             : config('options.def_lang');
     }
 
+    /**
+     * Базовая директория
+     *
+     * @return string
+     */
     public function getBasePath()
     {
         if ($this->server_base_path === null) {
@@ -362,15 +356,8 @@ class Routing {
         return $this->server_base_path;
     }
 
-    private function patternMatches($pattern, $uri, &$matches)
-    {
-        $pattern = preg_replace('/\/{(.*?)}/', '/(.*?)', $pattern);
-
-        return boolval(preg_match_all('#^' . strtolower($pattern) . '$#', strtolower($uri), $matches, PREG_OFFSET_CAPTURE));
-    }
-
     /**
-     * Set namespace
+     * Установить нэймсаэйс
      *
      * @param string $namespace
      * @return void
@@ -383,7 +370,7 @@ class Routing {
     }
 
     /*
-     * Get namespace
+     * Получить нэймспэйс
      *
      * @return string
      */
@@ -393,13 +380,68 @@ class Routing {
     }
 
     /**
-     * Is Admin Route ?
+     * Проверка на админку
      *
      * @return bool
      */
     public function isAdminSegment(): bool
     {
         return in_array(config('options.admin_partition'), explode('/', $this->getCurrentUri()));
+    }
+
+
+
+    /**
+     * Поиск совпадений URI с правилом роутинга
+     *
+     * @param $pattern
+     * @param $uri
+     * @param $matches
+     * @return bool
+     */
+    private function patternMatches($pattern, $uri, &$matches)
+    {
+        $pattern = preg_replace('/\/{(.*?)}/', '/(.*?)', $pattern);
+
+        return boolval(preg_match_all('#^' . strtolower($pattern) . '$#', strtolower($uri), $matches, PREG_OFFSET_CAPTURE));
+    }
+
+    /**
+     * Запуск миддлвэров если они имеются
+     *
+     * @return void
+     */
+    private function checkMiddlewares(): void
+    {
+        if (count($this->target_route['before'] ?? []) > 0) {
+
+            foreach ($this->target_route['before'] as $mw) {
+
+                $middleware = '\\app\\middlewares\\' . ucfirst(strtolower($mw));
+
+                try {
+                    $reflectedMethod = new \ReflectionMethod($middleware, 'handle');
+
+                    if ($reflectedMethod->isPublic() && (!$reflectedMethod->isAbstract())) {
+
+                        if ($reflectedMethod->isStatic()) {
+                            forward_static_call_array([$middleware, 'handle'], []);
+                        } else {
+
+                            if (\is_string($middleware)) {
+                                $middleware = new $middleware();
+                            }
+
+                            call_user_func_array([$middleware, 'handle'], []);
+                        }
+                    }
+                } catch (\ReflectionException $reflectionException) {
+
+                    NE::logSystemError($reflectionException, 'error');
+                    goTo404();
+                }
+            }
+        }
     }
 
 }

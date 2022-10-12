@@ -2,9 +2,8 @@
 
 namespace app\controllers;
 
-use framework\classes\Controller;
-use Dotenv\Dotenv;
 
+use framework\classes\Controller;
 
 class Home extends Controller {
 

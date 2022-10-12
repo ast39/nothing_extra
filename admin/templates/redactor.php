@@ -5,12 +5,12 @@
     <hr />
 <?php endif; ?>
 
-<?php if (Buffer::getInstance()->bad_log): ?>
-    <div class="row"><div class="mt-3 mb-3 p-2 bg-danger text-white text-center rounded col-12"><?= Buffer::getInstance()->bad_log ?></div></div>
+<?php if (Buffer::instance()->bad_log): ?>
+    <div class="row"><div class="mt-3 mb-3 p-2 bg-danger text-white text-center rounded col-12"><?= Buffer::instance()->bad_log ?></div></div>
 <?php endif; ?>
 
-<?php if (Buffer::getInstance()->good_log): ?>
-    <div class="row"><div class="mt-3 mb-3 p-2 bg-success text-white text-center rounded col-12"><?= Buffer::getInstance()->good_log ?></div></div>
+<?php if (Buffer::instance()->good_log): ?>
+    <div class="row"><div class="mt-3 mb-3 p-2 bg-success text-white text-center rounded col-12"><?= Buffer::instance()->good_log ?></div></div>
 <?php endif; ?>
 
 <?php if (in_array(PAGE_METHOD, ['newDir', 'newFile', 'editFile', 'uploadFile', 'showFile'])): ?>
@@ -21,7 +21,7 @@
         <table class="table table-striped col-12">
             <thead>
             <tr class="row">
-                <th scope="col" colspan="3" class="bg-primary text-white col-sm-12">Текущий каталог: <?= Buffer::getInstance()->url_legend ?></th>
+                <th scope="col" colspan="3" class="bg-primary text-white col-sm-12">Текущий каталог: <?= Buffer::instance()->url_legend ?></th>
             </tr>
             </thead>
             <tbody>
@@ -47,14 +47,14 @@
 
             <tr class="row"><td colspan="3" class="col-sm-12"></td></tr>
 
-            <?php if (empty(Buffer::getInstance()->list['dirs']) && empty(Buffer::getInstance()->list['files'])): ?>
+            <?php if (empty(Buffer::instance()->list['dirs']) && empty(Buffer::instance()->list['files'])): ?>
                 <tr class="row">
                     <td colspan="3" class="col-12 text-center bg-secondary text-white">Каталог пуст</td>
                 </tr>
             <?php endif; ?>
 
-            <?php if (!empty(Buffer::getInstance()->list['dirs'])):?>
-                <?php foreach (Buffer::getInstance()->list['dirs'] as $k => $v):?>
+            <?php if (!empty(Buffer::instance()->list['dirs'])):?>
+                <?php foreach (Buffer::instance()->list['dirs'] as $k => $v):?>
                     <tr class="row">
                         <td class="text-center col-sm-1"><img class="img-responsive img-rounded" alt="folder" width="32" src="<?= Url::img('system/folder.png') ?>" /></td>
                         <td class="text-left col-sm-9"><a href="<?= SITE ?>explorer/scan/<?= Session::get('conductor_url') . $v . ':'?>"><?= $v ?>/</a></td>
@@ -68,8 +68,8 @@
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php if (!empty(Buffer::getInstance()->list['files'])):?>
-                <?php foreach (Buffer::getInstance()->list['files'] as $k => $v):?>
+            <?php if (!empty(Buffer::instance()->list['files'])):?>
+                <?php foreach (Buffer::instance()->list['files'] as $k => $v):?>
                     <tr class="row">
                         <td class="text-center col-sm-1"><img class="img-responsive img-rounded" alt="file" width="32" src="<?= Url::img('system/'. ($v['type'] == 'img' ? 'image' : 'file') . '.png') ?>" /></td>
                         <td class="text-left col-sm-9"><?= $v['name'] ?></td>
@@ -96,7 +96,7 @@
             <tr>
                 <th scope="col" colspan="3" class="bg-primary text-white">
                     <div class="row pl-2 pr-2">
-                        Текущий каталог: <?= Buffer::getInstance()->url_legend ?>
+                        Текущий каталог: <?= Buffer::instance()->url_legend ?>
                     </div>
                 </th>
             </tr>
@@ -121,8 +121,8 @@
 
             <tr><td colspan="3"></td></tr>
 
-            <?php if (!empty(Buffer::getInstance()->list['dirs'])):?>
-                <?php foreach (Buffer::getInstance()->list['dirs'] as $k => $v):?>
+            <?php if (!empty(Buffer::instance()->list['dirs'])):?>
+                <?php foreach (Buffer::instance()->list['dirs'] as $k => $v):?>
                     <tr>
                         <td class="text-left" colspan="2">
                             <img class="img-responsive img-rounded" alt="folder" width="32" src="<?= Url::img('system/folder.png') ?>" />
@@ -138,8 +138,8 @@
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php if (!empty(Buffer::getInstance()->list['files'])):?>
-                <?php foreach (Buffer::getInstance()->list['files'] as $k => $v):?>
+            <?php if (!empty(Buffer::instance()->list['files'])):?>
+                <?php foreach (Buffer::instance()->list['files'] as $k => $v):?>
                     <tr>
                         <td class="text-left" colspan="2">
                             <img class="img-responsive img-rounded" alt="file" width="32" src="<?= Url::img('system/' . ($v['type'] == 'img' ? 'image' : 'file') . '.png') ?>" />

@@ -26,11 +26,11 @@ class Login extends Controller {
     public function index()
     {
         if (!LOCAL && (in_array(config('options.admin_login'), ['admin', 'root']) || !NE::strongPassword(config('options.admin_password')))) {
-            Buffer::getInstance()->set('attention', $this->langLine('login_default_data'));
+            Buffer::instance()->set('attention', $this->langLine('login_default_data'));
         }
 
         if (!LOCAL && (in_array(config('options.root_login'), ['admin', 'root']) || !NE::strongPassword(config('options.root_password')))) {
-            Buffer::getInstance()->set('attention', $this->langLine('login_default_data'));
+            Buffer::instance()->set('attention', $this->langLine('login_default_data'));
         }
 
         if (Request::issetAnyWhere('try_auth') != false) {
@@ -50,7 +50,7 @@ class Login extends Controller {
                 redirect(SITE . config('options.def_page'));
             } else {
 
-                Buffer::getInstance()->set('error', $this->langLine('login_wrong_data'));
+                Buffer::instance()->set('error', $this->langLine('login_wrong_data'));
             }
         }
 

@@ -5,6 +5,6 @@
 <div class="card border-primary mb-3 mt-3">
     <h5 class="card-header text-white bg-primary"><?= $this->langLine('lic_head_2') ?></h5>
     <div class="card-body">
-        <p class="card-text"><?= Buffer::getInstance()->license ?></p>
+        <p class="card-text"><?= Buffer::instance()->license ?></p>
     </div>
 </div>

@@ -13,11 +13,11 @@
             <label for="code"><?= $this->langLine('redactor_edit_form') ?></label>
             <textarea id="code" name="code" class="form-control" rows="16"></textarea>
         </div>
-        <input type="hidden" name="url" value="<?= Buffer::getInstance()->url?>" />
+        <input type="hidden" name="url" value="<?= Buffer::instance()->url?>" />
         <button type="submit" id="add" name="add" class="btn btn-success"><?= $this->langLine('redactor_add') ?></button>
         <button type="button" class="btn btn-danger" onclick="window.location.href='<?= SITE ?>explorer/back/0'"><?= $this->langLine('redactor_cancel') ?></button>
     </form>
-    <?php if (Buffer::getInstance()->error): ?>
-        <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::getInstance()->error ?></div>
+    <?php if (Buffer::instance()->error): ?>
+        <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::instance()->error ?></div>
     <?php endif; ?>
 </div>

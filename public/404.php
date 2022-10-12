@@ -1,16 +1,6 @@
 <?php
-/*
-+----------------------------------------------------------------------------------------------------
-| Объявляем кодировку проекта
-| Подключаем конфигурационные файлы
-+----------------------------------------------------------------------------------------------------
-*/
-
-include_once ROOT . 'framework' . DIRECTORY_SEPARATOR . 'autoloader.php';
-
-use framework\classes\{Url};
-
-header('Content-type: text/html; charset=utf-8' . config('options.charset'));
+    use framework\classes\{Url};
+    header('Content-type: text/html; charset=utf-8' . config('options.charset'));
 ?>
 
 <!DOCTYPE html>

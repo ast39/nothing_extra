@@ -18,7 +18,7 @@ trait Singleton {
      *
      * @return Singleton
      */
-    public static function getInstance(): self
+    public static function instance(): self
     {
         return static::$instance ?? (static::$instance = static::initInstance());
     }

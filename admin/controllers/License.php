@@ -39,7 +39,7 @@ class License extends Controller {
             array_push($$lic_name, $line);
         }
 
-        Buffer::getInstance()->set('license', config('options.def_lang') == 'ru'
+        Buffer::instance()->set('license', config('options.def_lang') == 'ru'
             ? implode('<br />', $lic_ru)
             : implode('<br />', $lic_en));
 

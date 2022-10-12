@@ -18,7 +18,7 @@ trait SingletonCollection {
      *
      * @return mixed|static
      */
-    public static function getInstance()
+    public static function instance()
     {
         return self::$instances[static::class] ?? (self::$instances[static::class] = new static());
     }

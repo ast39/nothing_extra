@@ -34,7 +34,7 @@ class Errorlog extends Controller {
             $logs[$file] = $this->getDayLog($file);
         }
 
-        Buffer::getInstance()->set('logs', $logs);
+        Buffer::instance()->set('logs', $logs);
 
         $this->loadTemplate();
     }

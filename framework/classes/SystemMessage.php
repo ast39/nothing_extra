@@ -18,7 +18,7 @@ class SystemMessage {
     {
         self::checkIsset();
 
-        $current_value      = Buffer::getInstance()->system_msg;
+        $current_value      = Buffer::instance()->system_msg;
         $current_value_msg  = $current_value[self::getKeyType($type)][$msg_key] ?? null;
 
         if ($current_value_msg === null) {
@@ -29,7 +29,7 @@ class SystemMessage {
                 : $current_value[self::getKeyType($type)][$msg_key] = [$message];
         }
 
-        Buffer::getInstance()->set('system_msg', $current_value);
+        Buffer::instance()->set('system_msg', $current_value);
     }
 
     /**
@@ -43,7 +43,7 @@ class SystemMessage {
     {
         self::checkIsset();
 
-        return Buffer::getInstance()->system_msg[self::getKeyType($type)][$msg_key] ?? [];
+        return Buffer::instance()->system_msg[self::getKeyType($type)][$msg_key] ?? [];
     }
 
     /**
@@ -56,7 +56,7 @@ class SystemMessage {
     {
         static::checkIsset();
 
-        return Buffer::getInstance()->system_msg[self::getKeyType($type)] ?? [];
+        return Buffer::instance()->system_msg[self::getKeyType($type)] ?? [];
     }
 
     /**
@@ -177,9 +177,9 @@ class SystemMessage {
      */
     private static function checkIsset(): void
     {
-        if (Buffer::getInstance()->system_msg === NULL) {
+        if (Buffer::instance()->system_msg === NULL) {
 
-            Buffer::getInstance()->set('system_msg', [
+            Buffer::instance()->set('system_msg', [
                 'error'   => [],
                 'warning' => [],
                 'success' => [],

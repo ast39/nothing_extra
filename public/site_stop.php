@@ -1,15 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexandr Statut
- * Date: 01.12.2021
- * Time: 11:00
- */
-
-use framework\classes\{Url};
-
-header('Content-type: text/html; charset=' . config('options.charset'));
-
+    use framework\classes\{Url};
+    header('Content-type: text/html; charset=' . config('options.charset'));
 ?>
 
 <!DOCTYPE html>

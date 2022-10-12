@@ -1,10 +1,4 @@
-<?php
-
-include_once frameworkPath() . 'autoloader.php';
-
-use framework\classes\Url;
-
-?>
+<?php use framework\classes\Url; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,10 +36,10 @@ use framework\classes\Url;
                             <td colspan="2" class="text-center">Это дефолтная страница <code><?= config('options.def_page') ?>/<?= config('options.def_method') ?></code>, которую вы можете изменить в файле <code>\config\options</code></td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-center">Рекомендуем ознакомиться с <a href="<?= SITE ?>manual/">руководством</a> к фрэймворку</td>
+                            <td colspan="2" class="text-center">Рекомендуем ознакомиться с <a href="<?= SITE_FOR_STATIC ?>manual/">руководством</a> к фрэймворку</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-center">Так же Вы можете перейти в <a href="<?= SITE . config('options.admin_partition') ?>">админку</a> фрэймворка</td>
+                            <td colspan="2" class="text-center">Так же Вы можете перейти в <a href="<?= SITE_FOR_STATIC . config('options.admin_partition') ?>">админку</a> фрэймворка</td>
                         </tr>
                         </tbody>
                     </table>

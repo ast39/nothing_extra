@@ -62,7 +62,7 @@ class Url {
 
     public static function isAdminPanel(): bool
     {
-        return defined('ADMIN');
+        return defined('ADMIN') && ADMIN === true;
     }
 
     public static function siteRootForStatic(): string

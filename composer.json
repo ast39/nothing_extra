@@ -1,36 +1,44 @@
 {
   "name": "ast/nothing_extra",
   "description": "Custom PHP Framework",
-  "license": "free",
+  "license": "MIT",
   "authors": [
     {
       "name": "Alexandr Statut",
-      "email": "alexandr.statut@gmail.com"
+      "email": "alexandr.statut@gmail.com",
+      "homepage": "https://xc39.ru",
+      "role": "Lead Developer"
     }
   ],
   "config": {
     "platform": {
-      "php": "7.3"
+      "php": "7.4"
     }
   },
 
   "require": {
-    "php": "^7.2|^8.0",
+    "php": ">=7.4.0",
+
     "ext-json": "*",
     "ext-soap": "*",
     "ext-iconv": "*",
     "ext-simplexml": "*",
     "ext-libxml": "*",
-    "illuminate/database": "^7.30",
-    "swiftmailer/swiftmailer": "^6.3",
+
+    "symfony/var-dumper": "^5.4",
     "symfony/cache": "^5.3",
+
+    "php-di/php-di": "^6.3",
+    "illuminate/database": "^7.30",
     "guzzlehttp/guzzle": "^7.3",
-    "vlucas/phpdotenv": "^5.4"
+    "vlucas/phpdotenv": "^5.4",
+    "monolog/monolog": "^2.8",
+    "swiftmailer/swiftmailer": "^6.3"
   },
 
   "autoload": {
     "psr-4": {
-      "\\": ""
+      "": ""
     }
   }
 }

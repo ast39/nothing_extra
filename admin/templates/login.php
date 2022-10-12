@@ -1,8 +1,8 @@
 <?php use framework\classes\Buffer; ?>
 
 <div class="col-6 offset-3 mt-5">
-    <?php if (Buffer::getInstance()->attention): ?>
-        <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::getInstance()->attention ?></div>
+    <?php if (Buffer::instance()->attention): ?>
+        <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::instance()->attention ?></div>
     <?php else: ?>
 
         <form method="post">
@@ -18,8 +18,8 @@
             <button type="submit" name="try_auth" class="btn btn-primary"><?= $this->langLine('login_auth') ?></button>
         </form>
 
-        <?php if (Buffer::getInstance()->error): ?>
-            <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::getInstance()->error ?></div>
+        <?php if (Buffer::instance()->error): ?>
+            <div class="mt-3 p-2 bg-danger text-white text-center rounded"><?= Buffer::instance()->error ?></div>
         <?php endif; ?>
 
     <?php endif; ?>

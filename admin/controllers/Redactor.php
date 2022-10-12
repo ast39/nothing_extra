@@ -36,8 +36,8 @@ class Redactor extends Controller {
         }
 
         $dir_data = $this->cloud->scan($url);
-        Buffer::getInstance()->set('list',       $dir_data);
-        Buffer::getInstance()->set('url_legend', $this->cloud->currentUrl(Session::get('conductor_url')));
+        Buffer::instance()->set('list',       $dir_data);
+        Buffer::instance()->set('url_legend', $this->cloud->currentUrl(Session::get('conductor_url')));
 
         $this->loadTemplate();
     }
@@ -83,10 +83,10 @@ class Redactor extends Controller {
             $_file     = explode('.', $file_url);
             $file_type = str_ireplace(['/', '\\'], '', end($_file));
 
-            Buffer::getInstance()->set('file', $file);
-            Buffer::getInstance()->set('url',  $url);
-            Buffer::getInstance()->set('file_url', str_replace(config('options.admin_partition') . '/', '', SITE) . substr($file_url, 0, -1));
-            Buffer::getInstance()->set('file_type', in_array(strtolower($file_type), ['jpeg', 'jpg', 'png', 'gif']) ? 'img' : (strtolower($file_type) == 'pdf' ? 'pdf' : 'other'));
+            Buffer::instance()->set('file', $file);
+            Buffer::instance()->set('url',  $url);
+            Buffer::instance()->set('file_url', str_replace(config('options.admin_partition') . '/', '', SITE) . substr($file_url, 0, -1));
+            Buffer::instance()->set('file_type', in_array(strtolower($file_type), ['jpeg', 'jpg', 'png', 'gif']) ? 'img' : (strtolower($file_type) == 'pdf' ? 'pdf' : 'other'));
 
             $this->loadTemplate();
         } else {
@@ -122,7 +122,7 @@ class Redactor extends Controller {
             redirect(SITE . 'explorer/scan/' . Session::get('conductor_url'));
         } else {
 
-            Buffer::getInstance()->set('url', $url);
+            Buffer::instance()->set('url', $url);
             $this->loadTemplate();
         }
     }
@@ -147,7 +147,7 @@ class Redactor extends Controller {
             }
 
             if (strpos($fileName, '.') === false) {
-                $fileName .= EXT;
+                $fileName .= '.php';
             }
 
             $data = Request::post('code');
@@ -158,7 +158,7 @@ class Redactor extends Controller {
             redirect(SITE . 'explorer/scan/' . Session::get('conductor_url'));
         } else {
 
-            Buffer::getInstance()->set('url', $url);
+            Buffer::instance()->set('url', $url);
             $this->loadTemplate();
         }
     }
@@ -191,9 +191,9 @@ class Redactor extends Controller {
         } else {
 
             $file = NE::separator($this->cloud->userCloudRoot() . $this->cloud->decodeUrl($url), '/');
-            Buffer::getInstance()->set('name', $this->cloud->decodeUrl($url));
-            Buffer::getInstance()->set('code', str_replace('textarea', '_textarea_', implode('', file($file))));
-            Buffer::getInstance()->set('url',  $this->cloud->decodeUrl($url));
+            Buffer::instance()->set('name', $this->cloud->decodeUrl($url));
+            Buffer::instance()->set('code', str_replace('textarea', '_textarea_', implode('', file($file))));
+            Buffer::instance()->set('url',  $this->cloud->decodeUrl($url));
 
             $this->loadTemplate();
         }
@@ -245,8 +245,8 @@ class Redactor extends Controller {
 
         } else {
 
-            Buffer::getInstance()->set('url_legend', $this->cloud->currentUrl(Session::get('conductor_url'), true));
-            Buffer::getInstance()->set('url', $url);
+            Buffer::instance()->set('url_legend', $this->cloud->currentUrl(Session::get('conductor_url'), true));
+            Buffer::instance()->set('url', $url);
             $this->loadTemplate();
         }
     }

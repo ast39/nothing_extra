@@ -21,7 +21,7 @@ class NE {
             ? "\\admin\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main')
             : "\\app\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main');
 
-        $lang_class_def = $namespace_lang_def::getInstance();
+        $lang_class_def = $namespace_lang_def::instance();
         $result_def     = property_exists($lang_class_def, $name)
             ? $lang_class_def->$name
             : null;
@@ -32,7 +32,7 @@ class NE {
             ? "\\admin_panel\\langs\\" . strtolower(LANG) . '\\' . ucfirst($file ?: 'main')
             : "\\project\\langs\\" . strtolower(LANG) . '\\' . ucfirst($file ?: 'main');
 
-        $lang_class = $namespace_lang::getInstance();
+        $lang_class = $namespace_lang::instance();
         $result     = property_exists($lang_class, $name)
             ? $lang_class->$name
             : null;

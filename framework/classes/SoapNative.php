@@ -36,8 +36,8 @@ class SoapNative {
             $log .= 'Service: ' . $this->service_link . PHP_EOL;
             $log .= 'Method: ' . $method . PHP_EOL;
             $log .= 'Error: ' . $fault . PHP_EOL;
-            Log::getInstance()->appendLog('_soap_native_', $log);
-            Log::getInstance()->saveLog('_soap_native_');
+            Log::instance()->appendLog('_soap_native_', $log);
+            Log::instance()->saveLog('_soap_native_');
 
             return false;
         }
