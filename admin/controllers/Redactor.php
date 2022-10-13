@@ -85,7 +85,7 @@ class Redactor extends Controller {
 
             Buffer::instance()->set('file', $file);
             Buffer::instance()->set('url',  $url);
-            Buffer::instance()->set('file_url', str_replace(config('options.admin_partition') . '/', '', SITE) . substr($file_url, 0, -1));
+            Buffer::instance()->set('file_url', str_replace(config('sys.admin_partition') . '/', '', SITE) . substr($file_url, 0, -1));
             Buffer::instance()->set('file_type', in_array(strtolower($file_type), ['jpeg', 'jpg', 'png', 'gif']) ? 'img' : (strtolower($file_type) == 'pdf' ? 'pdf' : 'other'));
 
             $this->loadTemplate();
@@ -116,8 +116,8 @@ class Redactor extends Controller {
             }
 
             $url = NE::separator($this->cloud->userCloudRoot() . $url . $fileName. '/');
-            mkdir($url, config('options.dir_access'), true);
-            //chmod($url, config('options.dir_access'));
+            mkdir($url, config('sys.dir_access'), true);
+            //chmod($url, config('sys.dir_access'));
             Session::set('Директория успешно создана: ' . $fileName, 'good_log');
             redirect(SITE . 'explorer/scan/' . Session::get('conductor_url'));
         } else {
@@ -153,7 +153,7 @@ class Redactor extends Controller {
             $data = Request::post('code');
             $url = NE::separator($this->cloud->userCloudRoot() . $url . $fileName, '/');
             file_put_contents($url, $data);
-            chmod($url, config('options.dir_access'));
+            chmod($url, config('sys.dir_access'));
             Session::set('Файл успешно создан: ' . $fileName, 'good_log');
             redirect(SITE . 'explorer/scan/' . Session::get('conductor_url'));
         } else {
@@ -217,9 +217,9 @@ class Redactor extends Controller {
                 redirect(SITE . 'explorer/scan/' . Session::get('conductor_url'));
             }
 
-            if ($file['size'] > (config('options.max_upload_size') * 1024 * 1024)) {
+            if ($file['size'] > (config('sys.max_upload_size') * 1024 * 1024)) {
 
-                Session::set('Файл не должен превышать размер в ' . config('options.max_upload_size') . ' MB', 'bad_log');
+                Session::set('Файл не должен превышать размер в ' . config('sys.max_upload_size') . ' MB', 'bad_log');
                 redirect(SITE . 'explorer/scan/' . Session::get('conductor_url'));
             }
 

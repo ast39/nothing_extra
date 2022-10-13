@@ -148,7 +148,7 @@ class Cloud {
      */
     public function userCloudRoot()
     {
-        return NE::separator(ROOT . $this->cloud_root . $this->user_folder, DIRECTORY_SEPARATOR);
+        return NE::separator(BASE_DIR . $this->cloud_root . $this->user_folder, DIRECTORY_SEPARATOR);
     }
 
     /**

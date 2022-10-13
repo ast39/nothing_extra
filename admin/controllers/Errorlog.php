@@ -9,8 +9,9 @@
 
 namespace admin\controllers;
 
-use framework\classes\{Controller, Buffer};
+use framework\classes\{Controller, Buffer, Log};
 use framework\modules\storage\Storage;
+use Monolog\Logger;
 
 
 class Errorlog extends Controller {
@@ -31,22 +32,11 @@ class Errorlog extends Controller {
         }
 
         foreach ($files as $file) {
-            $logs[$file] = $this->getDayLog($file);
+            $logs[$file] = Log::readLog($file);
         }
 
         Buffer::instance()->set('logs', $logs);
 
         $this->loadTemplate();
-    }
-
-    private function getDayLog($log_file)
-    {
-        $log = [];
-
-        if (Storage::disk('logs')->exists($log_file)) {
-            $log = Storage::disk('logs')->get($log_file)->toArray();
-        }
-
-        return $log;
     }
 }

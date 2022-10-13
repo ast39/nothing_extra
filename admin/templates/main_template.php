@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="<?= config('options.charset') ?>">
+    <meta charset="<?= config('sys.charset') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="noindex, nofollow">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?= str_replace(config('options.admin_partition'), 'admin/', SITE);?>favicon.ico" />
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?= str_replace(config('sys.admin_partition'), 'admin/', SITE);?>favicon.ico" />
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -65,10 +65,10 @@
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="<?= str_ireplace('/'. config('options.admin_partition'), '', SITE) ?>"><?= $this->langLine('menu_project') ?></a>
+                    <a class="nav-link" target="_blank" href="<?= str_ireplace('/'. config('sys.admin_partition'), '', SITE) ?>"><?= $this->langLine('menu_project') ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= str_ireplace('/'. config('options.admin_partition'), '', SITE_FOR_STATIC) . 'manual' ?>"><?= $this->langLine('menu_manual') ?></a>
+                    <a class="nav-link" href="<?= str_ireplace('/'. config('sys.admin_partition'), '', SITE_FOR_STATIC) . 'manual' ?>"><?= $this->langLine('menu_manual') ?></a>
                 </li>
                 <?php if ($this->isRootAuth() || $this->isAdminAuth()): ?>
                     <li class="nav-item">

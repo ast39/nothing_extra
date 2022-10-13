@@ -24,7 +24,7 @@ class License extends Controller {
             = $lic_ru
             = [];
 
-        $lic    = file(ROOT . 'License.txt');
+        $lic    = file(BASE_DIR . 'License.txt');
         $mark   = 'en';
 
         foreach ($lic as $line) {
@@ -39,7 +39,7 @@ class License extends Controller {
             array_push($$lic_name, $line);
         }
 
-        Buffer::instance()->set('license', config('options.def_lang') == 'ru'
+        Buffer::instance()->set('license', config('sys.def_lang') == 'ru'
             ? implode('<br />', $lic_ru)
             : implode('<br />', $lic_en));
 

@@ -129,14 +129,14 @@ class Disk {
     }
 
     /**
-     * Get full path to file from ROOT DIR
+     * Get full path to file from BASE_DIR DIR
      *
      * @param string $file_name
      * @return string
      */
     private function getFullPath(string $file_name): string
     {
-        return ROOT . 'storage/'. implode('/', $this->parts) . '/' . $file_name . '.st';
+        return BASE_DIR . 'storage/'. implode('/', $this->parts) . '/' . $file_name . '.log';
     }
 
     /**
@@ -159,7 +159,7 @@ class Disk {
     private function tryCreatePath($file_name): void
     {
         $parts    = explode('/', $file_name);
-        $tmp_link = ROOT . 'storage/'. implode('/', $this->parts);
+        $tmp_link = BASE_DIR . 'storage/'. implode('/', $this->parts);
 
         foreach ($parts as $k => $part) {
             $tmp_link .= '/' . $part;

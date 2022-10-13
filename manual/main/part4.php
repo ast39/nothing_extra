@@ -18,7 +18,7 @@
         <td class="text-left">Если мы сейчас в админке</td>
     </tr>
     <tr>
-        <td class="text-left"><code>ROOT</code></td>
+        <td class="text-left"><code>BASE_DIR</code></td>
         <td class="text-left">Корень сайта ( в файловой системе )</td>
     </tr>
     <tr>

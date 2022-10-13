@@ -9,7 +9,7 @@
 
 return [
     
-    'options' => [
+    'sys' => [
 
         # кодировка сайта
         'charset' => 'utf-8',

@@ -39,7 +39,6 @@ class Benchmark {
     {
         $data = [];
         $start_mark = $old_mark = $this->marks['_work_start_']['mark'];
-        $this->marks = DataBuilder::instance($this->marks)->orderBy('mark');
 
         foreach ($this->marks as $name => $markArr) {
 

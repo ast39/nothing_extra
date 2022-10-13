@@ -43,8 +43,8 @@ class Component extends Controller {
 
         $general_folder = defined('ADMIN') ? 'admin_panel' : 'project';
 
-        if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . $name . '.php')) {
-            include ROOT . $general_folder . DIRECTORY_SEPARATOR . $name . '.php';
+        if (file_exists(BASE_DIR . $general_folder . DIRECTORY_SEPARATOR . $name . '.php')) {
+            include BASE_DIR . $general_folder . DIRECTORY_SEPARATOR . $name . '.php';
         }
     }
 }

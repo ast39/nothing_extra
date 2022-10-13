@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="<?= config('options.charset') ?>">
+    <meta charset="<?= config('sys.charset') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -33,13 +33,13 @@
                             <td class="text-right text-success"><?= PHP_VERSION ?></td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-center">Это дефолтная страница <code><?= config('options.def_page') ?>/<?= config('options.def_method') ?></code>, которую вы можете изменить в файле <code>\config\options</code></td>
+                            <td colspan="2" class="text-center">Это дефолтная страница <code><?= config('sys.def_page') ?>/<?= config('sys.def_method') ?></code>, которую вы можете изменить в файле <code>\config\options</code></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="text-center">Рекомендуем ознакомиться с <a href="<?= SITE_FOR_STATIC ?>manual/">руководством</a> к фрэймворку</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="text-center">Так же Вы можете перейти в <a href="<?= SITE_FOR_STATIC . config('options.admin_partition') ?>">админку</a> фрэймворка</td>
+                            <td colspan="2" class="text-center">Так же Вы можете перейти в <a href="<?= SITE_FOR_STATIC . config('sys.admin_partition') ?>">админку</a> фрэймворка</td>
                         </tr>
                         </tbody>
                     </table>

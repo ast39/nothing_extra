@@ -1,13 +1,13 @@
 <?php
     use framework\classes\{Url};
-    header('Content-type: text/html; charset=utf-8' . config('options.charset'));
+    header('Content-type: text/html; charset=utf-8' . config('sys.charset'));
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Page not found : 404</title>
-    <meta charset="<?= config('options.charset') ?>">
+    <meta charset="<?= config('sys.charset') ?>">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?= Url::siteRootForStatic() . 'favicon.ico' ?>" />
@@ -33,7 +33,7 @@
                     <a href="<?= SITE ?>" class="btn btn-primary">Вернуться на главную</a>
                 </div>
                 <div class="card-footer text-muted">
-                    Почта для экстренной связи: <code><?= config('options.public_mail') ?></code>
+                    Почта для экстренной связи: <code><?= config('sys.public_mail') ?></code>
                 </div>
             </div>
         </div>

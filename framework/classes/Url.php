@@ -37,17 +37,17 @@ class Url {
 
     public static function sitePath(): string
     {
-        return config('options.site_dir') ?: '';
+        return config('sys.site_dir') ?: '';
     }
 
     public static function pageController(): string
     {
-        return PAGE ?? config('options.def_page');
+        return PAGE ?? config('sys.def_page');
     }
 
     public static function pageMethod(): string
     {
-        return PAGE_METHOD ?? config('options.def_method');
+        return PAGE_METHOD ?? config('sys.def_method');
     }
 
     public static function pageParameters(): array
@@ -57,7 +57,7 @@ class Url {
 
     public static function pageLang(): string
     {
-        return config('options.def_lang');
+        return config('sys.def_lang');
     }
 
     public static function isAdminPanel(): bool
@@ -73,14 +73,14 @@ class Url {
     public static function siteRoot(): string
     {
         return self::siteRootForStatic()
-            . (count(config('options.site_langs') ?? []) > 1 ? LANG . '/' : '');
+            . (count(config('sys.site_langs') ?? []) > 1 ? LANG . '/' : '');
     }
 
     public static function adminRoot(): string
     {
         return self::siteRootForStatic()
-            . (count(config('options.site_langs') ?? []) > 1 ? LANG . '/' : '')
-            . config('options.admin_partition');
+            . (count(config('sys.site_langs') ?? []) > 1 ? LANG . '/' : '')
+            . config('sys.admin_partition');
     }
 
     public static function inUrl(string $segment): bool

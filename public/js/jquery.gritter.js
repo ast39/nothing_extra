@@ -109,8 +109,8 @@
                 text = params.text,
                 image = params.image || '',
                 sticky = params.sticky || false,
-                item_class = params.class_name || $.gritter.options.class_name,
-                position = $.gritter.options.position,
+                item_class = params.class_name || $.gritter.sys.class_name,
+                position = $.gritter.sys.position,
                 time_alive = params.time || '';
 
             this._verifyWrapper();

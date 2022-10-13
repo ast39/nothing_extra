@@ -24,7 +24,7 @@ class Controller {
         SystemMessage::recoveryMessages();
         
         if ($this->auth !== false && !$this->isUserAuth()) {
-            redirect(SITE . config('options.login_page'));
+            redirect(SITE . config('sys.login_page'));
         }
 
         $this->csrfGen();
@@ -60,32 +60,32 @@ class Controller {
 
     protected function isUserAuth()
     {
-        return (bool)Session::get(config('options.user_auth_mark'));
+        return (bool)Session::get(config('sys.user_auth_mark'));
     }
 
     protected function isAdminAuth()
     {
-        return (bool)Session::get(config('options.admin_auth_mark'));
+        return (bool)Session::get(config('sys.admin_auth_mark'));
     }
 
     protected function isRootAuth()
     {
-        return (bool)Session::get(config('options.root_auth_mark'));
+        return (bool)Session::get(config('sys.root_auth_mark'));
     }
 
     protected function authUser()
     {
-        Session::set(true, config('options.user_auth_mark'));
+        Session::set(true, config('sys.user_auth_mark'));
     }
 
     protected function authAdmin()
     {
-        Session::set(true, config('options.admin_auth_mark'));
+        Session::set(true, config('sys.admin_auth_mark'));
     }
 
     protected function authRoot()
     {
-        Session::set(true, config('options.root_auth_mark'));
+        Session::set(true, config('sys.root_auth_mark'));
     }
 
     /**
@@ -101,8 +101,8 @@ class Controller {
 
         $general_folder = Url::isAdminPanel() ? 'admin' : 'app';
 
-        if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . '.php')) {
-            include_once ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . '.php';
+        if (file_exists(BASE_DIR . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . '.php')) {
+            include_once BASE_DIR . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $name . '.php';
         }
     }
 
@@ -124,27 +124,27 @@ class Controller {
 
         if (class_exists($namespace_class)) {
 
-            $method = config('options.def_method');
+            $method = config('sys.def_method');
             $page = new $namespace_class();
 
             empty($vars)
                 ? $page->$method()
                 : call_user_func_array([$page, $method], $vars);
 
-        } else if (file_exists(ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . '.php')) {
+        } else if (file_exists(BASE_DIR . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . '.php')) {
 
             extract($vars);
             array_walk($vars, function ($value, $key) {
                 Buffer::instance()->set($key, $value);
             });
 
-            include ROOT . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . '.php';
+            include BASE_DIR . $general_folder . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $name . '.php';
         }
     }
 
     protected function pageTitle()
     {
-        $method = defined('PAGE_METHOD') ? PAGE_METHOD : config('options.def_method');
+        $method = defined('PAGE_METHOD') ? PAGE_METHOD : config('sys.def_method');
 
         return
             $this->langLine(PAGE . '_' . $method . '_title')
@@ -180,8 +180,8 @@ class Controller {
         # Для начала получим резервный вариант для дефолтного языка
         # Путь до файла с текстом для дефолтного языка
         $namespace_lang_def = Url::isAdminPanel()
-            ? "\\admin\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main')
-            : "\\app\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main');
+            ? "\\admin\\langs\\" . strtolower(config('sys.def_lang')) . '\\' . ucfirst($file ?: 'main')
+            : "\\app\\langs\\" . strtolower(config('sys.def_lang')) . '\\' . ucfirst($file ?: 'main');
 
         $lang_class_def = $namespace_lang_def::instance();
         $result_def     = property_exists($lang_class_def, $name)
@@ -209,8 +209,8 @@ class Controller {
     {
         if (session_id() && !isAjax() && PAGE != 'login' && !$this->component) {
 
-            $_SESSION[config('options.session_array')]['lastPage']     = Session::get('currentPage') ?? null;
-            $_SESSION[config('options.session_array')]['currentPage']  = Url::siteRoot();
+            $_SESSION[config('sys.session_array')]['lastPage']     = Session::get('currentPage') ?? null;
+            $_SESSION[config('sys.session_array')]['currentPage']  = Url::siteRoot();
 
             Session::set(time(), 'lastActivity');
         }

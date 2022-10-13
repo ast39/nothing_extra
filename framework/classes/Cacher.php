@@ -12,7 +12,7 @@ class Cacher {
     public function __construct()
     {
         $this->instance = new TagAwareAdapter(
-            new FilesystemAdapter('', config('options.cache_time'))
+            new FilesystemAdapter('', config('sys.cache_time'))
         );
     }
 
@@ -57,7 +57,7 @@ class Cacher {
      */
     public function addItem($key, $value, array $tags, $expires = NULL)
     {
-        $item = $this->instance->getItem($key)->set($value)->expiresAfter($expires ?: config('options.cache_time'))->tag($tags);
+        $item = $this->instance->getItem($key)->set($value)->expiresAfter($expires ?: config('sys.cache_time'))->tag($tags);
         $this->instance->save($item);
     }
 

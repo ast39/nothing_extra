@@ -18,4 +18,6 @@ class Home extends Controller {
     {
         $this->loadTemplate();
     }
+
+
 }

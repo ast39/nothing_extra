@@ -1,5 +1,5 @@
 <div class="p-3 mb-2 bg-secondary text-white">Настройка NothingExtra</div>
-<div class="text-secondary bg-light border font-weight-normal p-1 pl-3 mb-2">\config\options.php</div>
+<div class="text-secondary bg-light border font-weight-normal p-1 pl-3 mb-2">\config\sys.php</div>
 <table class="table">
     <tbody>
     <tr>

@@ -18,7 +18,7 @@ class Session {
      */
     public static function userSession()
     {
-        return config('options.session_array');
+        return config('sys.session_array');
     }
     
     public static function get($key = false, $global_session = false)

@@ -2,10 +2,10 @@
 
 namespace framework\traits;
 
-require_once ROOT . 'cfg/db.php';
+require_once BASE_DIR . 'cfg/db.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
-use system\helper\DataBuilder;
+use framework\classes\DataBuilder;
 
 
 trait Crud {

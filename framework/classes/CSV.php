@@ -24,7 +24,7 @@
  * CSV::delete('users.csv', 'login', 555);
  */
 
-namespace system\helper;
+namespace framework\classes;
 
 
 class CSV {

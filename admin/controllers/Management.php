@@ -29,14 +29,14 @@ class Management extends Controller {
         if (Request::issetPost('robots')) {
 
             $text = Request::post('robots');
-            if (file_put_contents(ROOT . 'robots.txt', ltrim($text))) {
+            if (file_put_contents(BASE_DIR . 'robots.txt', ltrim($text))) {
                 Buffer::instance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
                 Buffer::instance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
         
-        $data = file(ROOT . 'robots.txt');
+        $data = file(BASE_DIR . 'robots.txt');
         Buffer::instance()->set('data', implode('', $data));
 
         $this->loadTemplate();
@@ -47,18 +47,18 @@ class Management extends Controller {
         if (Request::issetPost('sitemap')) {
 
             $text = Request::post('sitemap');
-            if (file_put_contents(ROOT . 'sitemap.xml', ltrim($text))) {
+            if (file_put_contents(BASE_DIR . 'sitemap.xml', ltrim($text))) {
                 Buffer::instance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
                 Buffer::instance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
 
-        if (!file_exists(ROOT . 'sitemap.xml')) {
+        if (!file_exists(BASE_DIR . 'sitemap.xml')) {
             Buffer::instance()->set('bad_log', 'Файл sitemap.xml не создан');
         } else {
 
-            $data = file(ROOT . 'sitemap.xml');
+            $data = file(BASE_DIR . 'sitemap.xml');
             Buffer::instance()->set('data', implode('', $data));
         }
         
@@ -74,14 +74,14 @@ class Management extends Controller {
         if (Request::issetPost('htaccess')) {
             $text = Request::post('htaccess');
 
-            if (file_put_contents(ROOT . '.htaccess', ltrim($text))) {
+            if (file_put_contents(BASE_DIR . '.htaccess', ltrim($text))) {
                 Buffer::instance()->set('good_log', $this->langLine('manage_scs_1'));
             } else {
                 Buffer::instance()->set('bad_log', $this->langLine('manage_err_1'));
             }
         }
 
-        $data = file(ROOT . '.htaccess');
+        $data = file(BASE_DIR . '.htaccess');
         Buffer::instance()->set('data', implode('', $data));
 
         $this->loadTemplate();

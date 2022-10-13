@@ -37,8 +37,8 @@ class Routing {
      */
     public function findMatches():? bool
     {
-        include ROOT . 'routes' . DIRECTORY_SEPARATOR . 'admin.php';
-        include ROOT . 'routes' . DIRECTORY_SEPARATOR . 'web.php';
+        include BASE_DIR . 'routes' . DIRECTORY_SEPARATOR . 'admin.php';
+        include BASE_DIR . 'routes' . DIRECTORY_SEPARATOR . 'web.php';
 
         $this->requested_method = $this->getRequestMethod();
         $uri = $this->getCurrentUri();
@@ -329,17 +329,17 @@ class Routing {
      */
     public function getLang()
     {
-        if (count(config('options.site_langs') ?? []) < 2) {
-            return config('options.def_lang');
+        if (count(config('sys.site_langs') ?? []) < 2) {
+            return config('sys.def_lang');
         }
 
         $maybe_lang = array_slice(
             explode('/', substr(
                 rawurldecode($_SERVER['REQUEST_URI']), strlen($this->getBasePath()))), 0, 1)[0];
 
-        return in_array($maybe_lang, config('options.site_langs'))
+        return in_array($maybe_lang, config('sys.site_langs'))
             ? $maybe_lang
-            : config('options.def_lang');
+            : config('sys.def_lang');
     }
 
     /**
@@ -386,7 +386,7 @@ class Routing {
      */
     public function isAdminSegment(): bool
     {
-        return in_array(config('options.admin_partition'), explode('/', $this->getCurrentUri()));
+        return in_array(config('sys.admin_partition'), explode('/', $this->getCurrentUri()));
     }
 
 

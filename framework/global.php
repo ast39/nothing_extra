@@ -87,12 +87,12 @@ function config($key = null, $default = null)
 
 function publicPath(): string
 {
-    return ROOT . 'public' . DIRECTORY_SEPARATOR;
+    return BASE_DIR . 'public' . DIRECTORY_SEPARATOR;
 }
 
 function frameworkPath(): string
 {
-    return ROOT . 'framework' . DIRECTORY_SEPARATOR;
+    return BASE_DIR . 'framework' . DIRECTORY_SEPARATOR;
 }
 
 function redirect(string $url, int $code = 302): void

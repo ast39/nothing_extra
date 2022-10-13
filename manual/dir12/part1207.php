@@ -1,5 +1,5 @@
 <div class="p-3 mb-2 bg-light text-secondary border">Класс работы с логированием <code>\framework\classes\Log</code></div>
-<div class="text-secondary bg-light border font-weight-normal p-1 pl-5 mb-2">\config\options.php</div>
+<div class="text-secondary bg-light border font-weight-normal p-1 pl-5 mb-2">\config\sys.php</div>
 <div class="code_block mb-2">
     <ol>
         <li>

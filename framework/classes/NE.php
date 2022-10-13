@@ -9,6 +9,7 @@
 namespace framework\classes;
 
 use framework\modules\storage\Storage;
+use Monolog\Logger;
 
 
 class NE {
@@ -18,8 +19,8 @@ class NE {
         # Для начала получим резервный вариант для дефолтного языка
         # Путь до файла с текстом для дефолтного языка
         $namespace_lang_def = defined('ADMIN') && $global == false
-            ? "\\admin\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main')
-            : "\\app\\langs\\" . strtolower(config('options.def_lang')) . '\\' . ucfirst($file ?: 'main');
+            ? "\\admin\\langs\\" . strtolower(config('sys.def_lang')) . '\\' . ucfirst($file ?: 'main')
+            : "\\app\\langs\\" . strtolower(config('sys.def_lang')) . '\\' . ucfirst($file ?: 'main');
 
         $lang_class_def = $namespace_lang_def::instance();
         $result_def     = property_exists($lang_class_def, $name)
@@ -42,14 +43,14 @@ class NE {
 
     public static function isUserAuth()
     {
-        return (bool)Session::get(config('options.user_auth_mark'));
+        return (bool)Session::get(config('sys.user_auth_mark'));
     }
 
     public static function logSystemError($e, $type = 'custom')
     {
         if (is_object($e)) {
 
-            $log = json_encode([
+            $log = [
                 'type'  => $type,
                 'time'  => date('H:i:s', time()),
                 'ip'    => static::getIp(),
@@ -58,36 +59,44 @@ class NE {
                 'file'  => $e->getFile(),
                 'line'  => $e->getLine(),
                 'trace' => $e->getTrace(),
-            ]);
+            ];
         } else {
 
-            $log = json_encode([
+            $log = [
                 'type' => $type,
                 'time' => date('H:i:s', time()),
                 'ip'   => static::getIp(),
                 'msg'  => $e,
-            ]);
+            ];
         }
 
-        if (config('options.log_errors') === true) {
+        if (config('sys.log_errors') === true) {
 
-            $file = date('Y-m-d', time());
-            if (Storage::disk('logs')->exists($file)) {
-                Storage::disk('logs')->append($file, $log);
-            } else {
-                Storage::disk('logs')->put($file, $log);
+            switch ($type) {
+
+                case 'error': Log::instance()->critical('Error', $log);
+                break;
+
+                case 'exception': Log::instance()->error('Exception', $log);
+                break;
+
+                case 'throw': Log::instance()->warning('Throwable', $log);
+                break;
+
+                default: Log::instance()->notice('Info', $log);
+                break;
             }
         }
 
         if (!PROD) {
-            Error::view(objectToArray(json_decode($log, true)));
+            Error::view(objectToArray($log));
             die;
         }
     }
 
     public static function logVisit()
     {
-        if (config('options.log_visits') === true) {
+        if (config('sys.log_visits') === true) {
             $indexing = new SiteIndexing();
 
             $log = json_encode([

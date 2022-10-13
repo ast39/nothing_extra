@@ -3,12 +3,12 @@
 use framework\classes\Routing;
 
 # Admin panel
-Routing::instance()->group(['prefix' => config('options.admin_partition')], function($mv) {
+Routing::instance()->group(['prefix' => config('sys.admin_partition')], function($mv) {
 
     Routing::instance()->request('GET|POST', 'login', ['uses' => 'Login@index']);
 });
 
-Routing::instance()->group(['prefix' => config('options.admin_partition'), 'middleware' => ['Admin']], function($mv) {
+Routing::instance()->group(['prefix' => config('sys.admin_partition'), 'middleware' => ['Admin']], function($mv) {
 
     Routing::instance()->get( 'license',      ['middleware' => $mv, 'uses' => 'License@index']);
     Routing::instance()->get( 'home',         ['middleware' => $mv, 'uses' => 'Home@index']);
